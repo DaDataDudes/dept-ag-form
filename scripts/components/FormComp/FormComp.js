@@ -7,7 +7,7 @@ export default function ({ submitForm }) {
         <input name="email" type="text" />
         <input name="password" type="password" />
     {/* TODO: add disabled prop when form is submitting */}
-        <button type="submit">Login</button>
+        <button type="submit">Submit</button>
       </form>
     </div>
   );

@@ -5,23 +5,27 @@ import Rebase from 're-base';
 const base = Rebase.createClass('https://scorching-fire-3742.firebaseio.com/');
 
 export default class FormCont extends Component {
+  constructor(props) {
+    super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
   handleSubmit(event) {
+    event.preventDefault();
     const form = event.target;
-    const email = form.email;
-    const formInfo = [email];
+    const email = form.email.value;
+    const formInfo = email;
 
-    base.push('scorching-fire-3742', { data: formInfo })
+    base.push('scorching-fire-3742', { data: { info: formInfo } })
       .then(() => {
-        console.log('made it');
-        return this.props.history.push('/thanks');
+       console.log('sweet');
       });
   }
 
   render() {
     return (
       <div>
-        <FormComp submitForm={this.props.handleSubmit} />
+        <FormComp submitForm={this.handleSubmit} />
       </div>
     );
   }
