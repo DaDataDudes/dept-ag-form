@@ -18,7 +18,7 @@ export default class FormCont extends Component {
 
     base.push('scorching-fire-3742', { data: { info: formInfo } })
       .then(() => {
-       console.log('sweet');
+        this.props.history.push('/thankyou');
       });
   }
 
