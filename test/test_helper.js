@@ -1,12 +1,12 @@
-var chai = require('chai');
-var jsdom = require('jsdom');
+import chai from 'chai';
+import jsdom from 'jsdom';
 
-var doc = jsdom.jsdom('<!doctype html><html><body></body></html>');
-var win = doc.defaultView;
+const doc = jsdom.jsdom('<!doctype html><html><body></body></html>');
+const win = doc.defaultView;
 
 global.document = doc;
 global.window = win;
-Object.keys(window).forEach(function(key) {
+Object.keys(window).forEach(key => {
   if (!(key in global)) {
     global[key] = window[key];
   }

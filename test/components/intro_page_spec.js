@@ -1,8 +1,10 @@
-var ReactDOM = require('react-dom');
-var React = require('react');
-var ReactTestUtils = require('react-addons-test-utils');
-var chai = require('chai');
-var expect = chai.expect;
+import ReactDOM from 'react-dom';
+import React from 'react';
+import ReactTestUtils from 'react-addons-test-utils';
+import { expect } from 'chai';
 
-
-describe('intro_page')
+describe('intro_page', () => {
+  it('says fuck yeah', () => {
+    expect(1).to.equal(1);
+  });
+});
