@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { FormComp } from '../../components';
+import { browserHistory } from 'react-router';
 
 import Rebase from 're-base';
 const base = Rebase.createClass('https://scorching-fire-3742.firebaseio.com/');
@@ -18,7 +19,7 @@ export default class FormCont extends Component {
 
     base.push('scorching-fire-3742', { data: { info: formInfo } })
       .then(() => {
-        this.props.history.push('/thankyou');
+        browserHistory.push('/thankyou');
       });
   }
 
