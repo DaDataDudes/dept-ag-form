@@ -14,8 +14,8 @@ export default class FormCont extends Component {
   handleSubmit(event) {
     event.preventDefault();
     const form = event.target;
-    const email = form.email.value;
-    const formInfo = email;
+    const fullName = form.fullName.value;
+    const formInfo = fullName;
 
     base.push('scorching-fire-3742', { data: { info: formInfo } })
       .then(() => {

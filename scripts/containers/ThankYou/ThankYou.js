@@ -10,7 +10,7 @@ export default class ThankYou extends Component {
   render() {
     return (
       <div>
-        {/* Put thank you page here */}
+        <h1>Mahalo!</h1>
       </div>
     );
   }
