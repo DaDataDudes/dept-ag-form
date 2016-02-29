@@ -5,7 +5,8 @@ export default class Welcome extends Component {
   render() {
     return (
       <div>
-        <Link to="form">Get Started</Link>
+        <h1>Aloha and welcome to Hawaii!</h1>
+        <Link to="form"><button>Get Started</button></Link>
       </div>
     );
   }
