@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "d38cad31d463d1b5a4fe"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "056ad96d1b4c1175cbe6"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -28158,9 +28158,18 @@
 	        'div',
 	        null,
 	        _react2.default.createElement(
+	          'h1',
+	          null,
+	          'Aloha and welcome to Hawaii!'
+	        ),
+	        _react2.default.createElement(
 	          _reactRouter.Link,
 	          { to: 'form' },
-	          'Get Started'
+	          _react2.default.createElement(
+	            'button',
+	            null,
+	            'Get Started'
+	          )
 	        )
 	      );
 	    }
@@ -33346,6 +33355,8 @@
 
 	var _components = __webpack_require__(309);
 
+	var _reactRouter = __webpack_require__(248);
+
 	var _reBase = __webpack_require__(311);
 
 	var _reBase2 = _interopRequireDefault(_reBase);
@@ -33375,15 +33386,13 @@
 	  _createClass(FormCont, [{
 	    key: 'handleSubmit',
 	    value: function handleSubmit(event) {
-	      var _this2 = this;
-
 	      event.preventDefault();
 	      var form = event.target;
-	      var email = form.email.value;
-	      var formInfo = email;
+	      var fullName = form.fullName.value;
+	      var formInfo = fullName;
 
 	      base.push('scorching-fire-3742', { data: { info: formInfo } }).then(function () {
-	        _this2.props.history.push('/thankyou');
+	        _reactRouter.browserHistory.push('/thankyou');
 	      });
 	    }
 	  }, {
@@ -33458,8 +33467,26 @@
 	    _react2.default.createElement(
 	      "form",
 	      { onSubmit: submitForm },
-	      _react2.default.createElement("input", { name: "email", type: "text" }),
-	      _react2.default.createElement("input", { name: "password", type: "password" }),
+	      _react2.default.createElement("input", { type: "text", name: "fullName" }),
+	      _react2.default.createElement("input", { type: "text", name: "homeAddress" }),
+	      _react2.default.createElement("input", { type: "text", name: "city" }),
+	      _react2.default.createElement(
+	        "select",
+	        null,
+	        _react2.default.createElement("option", { value: "state" })
+	      ),
+	      _react2.default.createElement("input", { type: "text", name: "zip" }),
+	      _react2.default.createElement("input", { type: "text", name: "hawaiiAddress" }),
+	      _react2.default.createElement(
+	        "select",
+	        null,
+	        _react2.default.createElement("option", { value: "island" })
+	      ),
+	      _react2.default.createElement("input", { type: "text", name: "airlineShip" }),
+	      _react2.default.createElement("input", { type: "text", name: "phoneNumber" }),
+	      _react2.default.createElement("input", { type: "text", name: "numberInParty" }),
+	      _react2.default.createElement("input", { type: "text", name: "flightNumber" }),
+	      _react2.default.createElement("input", { type: "date", name: "currentDate" }),
 	      _react2.default.createElement(
 	        "button",
 	        { type: "submit" },
@@ -34353,7 +34380,15 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement('div', null);
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'h1',
+	          null,
+	          'Mahalo!'
+	        )
+	      );
 	    }
 	  }]);
 
