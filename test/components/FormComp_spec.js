@@ -1,11 +1,16 @@
 import React from 'react';
 import {
+  mount,
+  render,
+  shallow,
+} from 'enzyme';
+import {
   renderIntoDocument,
-  // scryRenderedDOMComponentsWithTag,
+  scryRenderedDOMComponentsWithTag,
   findRenderedDOMComponentWithClass,
   // scryRenderedDOMComponentsWithClass,
   // scryRenderedComponentsWithType,
-  // Simulate,
+  Simulate,
 } from 'react-addons-test-utils';
 import { expect } from 'chai';
 import FormCont from '../../scripts/containers/FormCont/FormCont.js';
@@ -99,7 +104,7 @@ describe('FormCont', () => {
     expect(partyNum.length).to.equal(1);
   });
   it('Should contain a button that redirects to \'thankyou\' route', () => {
-    const button = scryRenderedDOMComponentsWithTag(form, 'button');
+    const button = scryRenderedDOMComponentsWithTag(formCont, 'button');
 
     expect(button.length).to.equal(1);
     expect(button[0].textContent).to.equal('Thank You');

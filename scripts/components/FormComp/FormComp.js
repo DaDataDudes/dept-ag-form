@@ -1,10 +1,10 @@
 import React from 'react';
 
-export default function ({ submitForm }) {
+export default function ({ submitForm, itemModal }) {
   return (
     <div className="main-form">
       <form onSubmit={submitForm}>
-        <select name="plantSelection" className="plant-selection">
+        <select name="plantSelection" className="plant-selection" onChange={ itemModal }>
           <option value="fruitVeggie">Fresh Fruit & Vegetables</option>
           <option value="dirt">Soil, Growing Media, Sand, etc</option>
           <option value="flowers">Cut Flowers & Foilage</option>

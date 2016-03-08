@@ -1,5 +1,6 @@
 import chai from 'chai';
 import jsdom from 'jsdom';
+import chaiEnzyme from 'chai-enzyme';
 
 const doc = jsdom.jsdom('<!doctype html><html><body></body></html>');
 const win = doc.defaultView;
@@ -11,3 +12,5 @@ Object.keys(window).forEach(key => {
     global[key] = window[key];
   }
 });
+
+chai.use(chaiEnzyme());

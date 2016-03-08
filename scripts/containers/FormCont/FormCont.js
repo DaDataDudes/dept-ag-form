@@ -23,6 +23,10 @@ export default class FormCont extends Component {
       });
   }
 
+  handleModal() {
+
+  }
+
   render() {
     return (
       <div>
@@ -35,4 +39,5 @@ export default class FormCont extends Component {
 FormCont.propTypes = {
   history: React.PropTypes.object,
   handleSubmit: React.PropTypes.func,
+  handleModal: React.PropTypes.func,
 };
