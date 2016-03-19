@@ -15,6 +15,8 @@ import {
 import { expect } from 'chai';
 import FormCont from '../../scripts/containers/FormCont/FormCont.js';
 
+const TestUtils = React.addons.TestUtils;
+
 describe('FormCont', () => {
   const formCont = renderIntoDocument(
     <FormCont />
@@ -24,6 +26,15 @@ describe('FormCont', () => {
     const plantOptions = plantSelection.querySelectorAll('option');
 
     expect(plantOptions.length).to.equal(8);
+
+    //var chosen = plantOptions[3]
+    //invoke function call with chosen being the variable
+    //
+
+    //test if modal field appears
+    //test if modal field has input value
+    //describe what input value would look like chose.val = ["random"]
+
   });
   it('should declare animals', () => {
     const animalSelection = findRenderedDOMComponentWithClass(formCont, 'animal-selection');
