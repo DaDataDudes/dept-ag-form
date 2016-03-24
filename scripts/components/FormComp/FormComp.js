@@ -4,15 +4,15 @@ export default function ({ submitForm, itemModal }) {
   return (
     <div className="main-form">
       <form onSubmit={submitForm}>
-        <select name="plantSelection" className="plant-selection" onChange={ itemModal }>
-          <option value="fruitVeggie">Fresh Fruit & Vegetables</option>
-          <option value="dirt">Soil, Growing Media, Sand, etc</option>
-          <option value="flowers">Cut Flowers & Foilage</option>
-          <option value="seafood">Live Seafood(lobsters, clams, oysters, etc.)</option>
-          <option value="plants">Rooted Plants & Plant Cuttings, or Algae</option>
-          <option value="germs">Cultures of Bacteria, Fungi, Viruses, or Protozoa</option>
-          <option value="seeds">Raw or Propagative Seeds or Bulbs</option>
-          <option value="wildAnimals">Insects, Liva Fishes, Amphibians, etc</option>
+        <select name="plantSelection" className="input__plant-selection" onChange={ itemModal }>
+          <option defaultValue className="input__plant-option" id="fruitVeggie" value="fruitVeggie">Fresh Fruit & Vegetables</option>
+          <option className="input__plant-option" id="dirt" value="dirt">Soil, Growing Media, Sand, etc</option>
+          <option className="input__plant-option" value="flowers">Cut Flowers & Foilage</option>
+          <option className="input__plant-option" value="seafood">Live Seafood(lobsters, clams, oysters, etc.)</option>
+          <option className="input__plant-option" value="plants">Rooted Plants & Plant Cuttings, or Algae</option>
+          <option className="input__plant-option" value="germs">Cultures of Bacteria, Fungi, Viruses, or Protozoa</option>
+          <option className="input__plant-option" value="seeds">Raw or Propagative Seeds or Bulbs</option>
+          <option className="input__plant-option" value="wildAnimals">Insects, Liva Fishes, Amphibians, etc</option>
         </select>
         <select name="animalSelection" className="animal-selection">
           <option value="dogs">Dogs</option>
