@@ -5,21 +5,21 @@ export default function ({ submitForm, itemModal }) {
     <div className="main-form">
       <form onSubmit={submitForm}>
         <select name="plantSelection" className="input__plant-selection" onChange={ itemModal }>
-          <option defaultValue className="input__plant-option" id="fruitVeggie" value="fruitVeggie">Fresh Fruit & Vegetables</option>
-          <option className="input__plant-option" id="dirt" value="dirt">Soil, Growing Media, Sand, etc</option>
-          <option className="input__plant-option" value="flowers">Cut Flowers & Foilage</option>
-          <option className="input__plant-option" value="seafood">Live Seafood(lobsters, clams, oysters, etc.)</option>
-          <option className="input__plant-option" value="plants">Rooted Plants & Plant Cuttings, or Algae</option>
-          <option className="input__plant-option" value="germs">Cultures of Bacteria, Fungi, Viruses, or Protozoa</option>
-          <option className="input__plant-option" value="seeds">Raw or Propagative Seeds or Bulbs</option>
-          <option className="input__plant-option" value="wildAnimals">Insects, Liva Fishes, Amphibians, etc</option>
+          <option defaultValue className="input__select-option" value="fruitVeggie">Fresh Fruit & Vegetables</option>
+          <option className="input__select-option" value="dirt">Soil, Growing Media, Sand, etc</option>
+          <option className="input__select-option" value="flowers">Cut Flowers & Foilage</option>
+          <option className="input__select-option" value="seafood">Live Seafood(lobsters, clams, oysters, etc.)</option>
+          <option className="input__select-option" value="plants">Rooted Plants & Plant Cuttings, or Algae</option>
+          <option className="input__select-option" value="germs">Cultures of Bacteria, Fungi, Viruses, or Protozoa</option>
+          <option className="input__select-option" value="seeds">Raw or Propagative Seeds or Bulbs</option>
+          <option className="input__select-option" value="wildAnimals">Insects, Liva Fishes, Amphibians, etc</option>
         </select>
-        <select name="animalSelection" className="animal-selection">
-          <option value="dogs">Dogs</option>
-          <option value="cats">Cats</option>
-          <option value="birds">Birds</option>
-          <option value="reptiles">Reptiles (Turtles, Lizards, Snakes, etc)</option>
-          <option value="otherAnimals">Other Animals</option>
+        <select name="animalSelection" onChange={ itemModal } className="input__animal-selection">
+          <option defaultValue className="input__select-option" value="dogs">Dogs</option>
+          <option className="input__select-option" value="cats">Cats</option>
+          <option className="input__select-option" value="birds">Birds</option>
+          <option className="input__select-option" value="reptiles">Reptiles (Turtles, Lizards, Snakes, etc)</option>
+          <option className="input__select-option" value="otherAnimals">Other Animals</option>
         </select>
         <select name="none" className="none">
           <option value="noneOfTheAbove">None Of The Above</option>

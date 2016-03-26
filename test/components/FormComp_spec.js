@@ -1,33 +1,53 @@
 import React from 'react';
 import { mount, render, shallow } from 'enzyme';
-import { Simulate } from 'react-addons-test-utils';
+import sinon from 'sinon';
 import { expect } from 'chai';
 import FormComp from '../../scripts/components/FormComp/FormComp.js';
 
 describe('FormComp', () => {
 
-  it('should declare plants', () => {
-    const mockModalCall = () => {return true;}
+  describe('plants & animal selection dropdowns', () => {
+
+    // create mock function to pass in as props
+    const mockModalCall = sinon.spy();
+    // here we use mount because the simulate API for shallow render
+    // does not allow the 'change' event
     const formComp = mount(<FormComp itemModal={mockModalCall}/>);
-    const plantSelection = formComp.find('.input__plant-selection');
 
-    expect(plantSelection).to.have
-      .exactly(8)
-      .descendants('.input__plant-option');
+    it('should declare plants', () => {
+      // find the plant select box and make sure it has 8 options
+      expect(
+        formComp.find('.input__plant-selection'))
+        .to.have
+        .exactly(8)
+        .descendants('.input__select-option');
 
-    expect(formComp.prop('itemModal')).to.equal(mockModalCall);
+      // simulate change event on the dirt option
+      formComp.find('[value="dirt"]').simulate('change');
+      // sinon spy should have been called once
+      expect(mockModalCall.calledOnce).to.equal(true);
+      // reset sinon spy
+      mockModalCall.reset();
+    });
 
-    //test if modal field appears
-    //test if modal field has input value
-    //describe what input value would look like chose.val = ["random"]
+    it('should declare animals', () => {
+      // find the animal select box and make sure it has 5 options
+      expect(
+        formComp.find('.input__animal-selection'))
+        .to.have
+        .exactly(5)
+        .descendants('.input__select-option');
+
+      // simulate change event on the cats option
+      formComp.find('[value="cats"]').simulate('change');
+      // sinon spy should have been called once
+      expect(mockModalCall.calledOnce).to.equal(true)
+      // reset sinon spy
+      mockModalCall.reset();
+    });
 
   });
-  // it('should declare animals', () => {
-  //   const animalSelection = findRenderedDOMComponentWithClass(formComp, 'animal-selection');
-  //   const animalOptions = animalSelection.querySelectorAll('option');
-  //
-  //   expect(animalOptions.length).to.equal(5);
-  // });
+
   // it('should have a checkbox that checks for none of the above', () => {
   //   const noSelection = findRenderedDOMComponentWithClass(formComp, 'none');
   //   const noSelectionOptions = noSelection.querySelectorAll('option');
