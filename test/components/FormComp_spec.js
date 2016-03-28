@@ -1,6 +1,6 @@
 import React from 'react';
-import { mount, render, shallow } from 'enzyme';
 import sinon from 'sinon';
+import { mount, render, shallow } from 'enzyme';
 import { expect } from 'chai';
 import FormComp from '../../scripts/components/FormComp/FormComp.js';
 
