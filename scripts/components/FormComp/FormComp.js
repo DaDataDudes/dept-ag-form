@@ -21,25 +21,25 @@ export default function ({ submitForm, itemModal }) {
           <option className="input__select-option" value="reptiles">Reptiles (Turtles, Lizards, Snakes, etc)</option>
           <option className="input__select-option" value="otherAnimals">Other Animals</option>
         </select>
-        <select name="none" className="none">
-          <option value="noneOfTheAbove">None Of The Above</option>
+        <select name="input__none-above" className="input__none-above">
+          <option className="input__select-option" value="noneOfTheAbove">None Of The Above</option>
         </select>
-        <input type="text" name="fullName" />
-        <input type="text" name="homeAddress" />
-        <input type="text" name="city" />
+        <input name="fullName" type="text" className="input__input-field" />
+        <input name="homeAddress" type="text" className="input__input-field" />
+        <input name="city"type="text" className="input__input-field" />
         <select>
           <option value="state"></option>
         </select>
-        <input type="text" name="zip" />
-        <input type="text" name="hawaiiAddress" />
+        <input type="text" name="zip" className="input__input-field" />
+        <input type="text" name="hawaiiAddress" className="input__input-field" />
         <select>
           <option value="island"></option>
         </select>
-        <input type="text" name="airlineShip" />
-        <input type="text" name="phoneNumber" />
-        <input type="text" name="numberInParty" />
-        <input type="text" name="flightNumber" />
-        <input type="date" name="currentDate" />
+        <input type="text" name="airlineShip" className="input__input-field" />
+        <input type="text" name="phoneNumber" className="input__input-field" />
+        <input type="text" name="numberInParty" className="input__input-field" />
+        <input type="text" name="flightNumber" className="input__input-field" />
+        <input type="date" name="currentDate" className="input__input-field" />
     {/* TODO: add disabled prop when form is submitting */}
         <button type="submit">Submit</button>
       </form>
