@@ -1,0 +1,14 @@
+{
+ "extends": "airbnb",
+ "ecmaFeatures": {
+   "experimentalObjectRestSpread": true,
+ },
+ "env": {
+   "browser": true,
+   "mocha": true,
+ },
+ "globals": {
+   "CONFIG": true,
+   "NODE_ENV": true,
+ }
+}
