@@ -4,13 +4,15 @@ import React from 'react';
 import Store from '/imports/client/store/store';
 import { ApolloProvider } from 'react-apollo';
 import apolloClient from '/imports/client/apollo-client';
-import { Router, Route } from 'react-router';
-import WelcomePage from '../imports/client/components/welcomePage';
+import { Router, Route, browserHistory } from 'react-router';
+import WelcomePage from '../imports/client/containers/welcomePage';
+import FormPage from '../imports/client/containers/formPage';
 
 Meteor.startup(() => {
   render(<ApolloProvider client={apolloClient} store={Store}>
-    <Router>
+    <Router history={browserHistory}>
       <Route path='/' component={WelcomePage} />
+      <Route path='/form' component={FormPage} />
     </Router>
    </ApolloProvider>, document.getElementById('root'));
 })
