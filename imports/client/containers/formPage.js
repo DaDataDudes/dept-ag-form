@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { browserHistory } from 'react-router';
 import { reduxForm } from 'redux-form';
+//created Declare.js components and DeclareContainer container
+import DeclareContainer from './DeclareContainer';
 
 const islands = ['Oahu', 'Maui', 'Big Island', 'Kauai', 'Molokai', 'Lanai']
 
