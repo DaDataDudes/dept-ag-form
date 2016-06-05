@@ -4,6 +4,22 @@ import { reduxForm } from 'redux-form';
 //created Declare.js components and DeclareContainer container
 import DeclareContainer from './DeclareContainer';
 
+const plantTypes = {
+  fruitVeggies: 'Fresh Fruit & Vegetables',
+  cutFlowers: 'Cut Flowers & Foliage',
+  rootedPlants: 'Rooted Plants & Plant Cuttings, or Algae',
+  rawSeeds: 'Raw or Propagative Seeds or Bulbs',
+  soil: 'Soil, Growing Media, Sand, etc.',
+  seafood: 'Live Seafood (lobsters, clams, oysters, etc.)',
+  bacteria: 'Cultures of Bacteria, Fungi, Viruses, or Protozoa',
+  insects: 'Insects, Live Fishes, Amphibians, etc.'
+};
+
+const animalTypes = {
+  dog: 'blah',
+  cat: 'blah'
+};
+
 const islands = ['Oahu', 'Maui', 'Big Island', 'Kauai', 'Molokai', 'Lanai']
 
 const rangeOption = ['0', '1', '2', '3', '4', '5+']
@@ -19,6 +35,8 @@ class FormPage extends Component {
       <div>
         <header>Contact Information</header>
         <form onSubmit={handleSubmit}>
+          <DeclareContainer types={plantTypes} />
+          <DeclareContainer types={animalTypes} />
           <div>
             <label>First Name</label>
             <div>
