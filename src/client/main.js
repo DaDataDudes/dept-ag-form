@@ -1,12 +1,12 @@
 import { Meteor } from 'meteor/meteor';
 import { render } from 'react-dom';
 import React from 'react';
-import Store from '/imports/client/store/store';
+import Store from 'imports/client/store/store';
 import { ApolloProvider } from 'react-apollo';
-import apolloClient from '/imports/client/apollo-client';
+import apolloClient from 'imports/client/apollo-client';
 import { Router, Route, browserHistory } from 'react-router';
-import WelcomePage from '../imports/client/containers/welcomePage';
-import FormPage from '../imports/client/containers/formPage';
+import WelcomePage from 'imports/client/containers/welcomePage';
+import FormPage from 'imports/client/containers/formPage';
 
 Meteor.startup(() => {
   render(<ApolloProvider client={apolloClient} store={Store}>

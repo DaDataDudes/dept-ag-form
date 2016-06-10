@@ -1,4 +1,4 @@
-export default schema = [`
+export const schema = [`
   type Form {
     id: String
   }

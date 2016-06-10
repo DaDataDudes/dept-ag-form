@@ -1,5 +1,5 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
-import apolloClient from '/imports/client/apollo-client';
+import apolloClient from 'imports/client/apollo-client';
 import createLogger from 'redux-logger';
 import { reducer as formReducer } from 'redux-form';
 const rootReducer = combineReducers({
