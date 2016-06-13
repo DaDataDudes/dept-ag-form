@@ -16,8 +16,11 @@ const plantTypes = {
 };
 
 const animalTypes = {
-  dog: 'blah',
-  cat: 'blah'
+  dog: 'Dogs',
+  cat: 'Cats',
+  bird: 'Birds',
+  reptiles: 'Reptiles (Turtles, Lizards, Snakes, etc.)',
+  other: 'Other Animals'
 };
 
 const islands = ['Oahu', 'Maui', 'Big Island', 'Kauai', 'Molokai', 'Lanai']

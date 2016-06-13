@@ -18,6 +18,7 @@ class DeclareContainer extends Component {
 
     return (<div>
         <div>
+        <h3> A) I have the following items in my possession and/or baggage </h3>
           {Object.keys(this.state).map(field =>
               <label key={field}>
                 <input type="checkbox"
