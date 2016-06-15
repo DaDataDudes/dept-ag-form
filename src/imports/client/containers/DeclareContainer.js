@@ -38,7 +38,7 @@ class DeclareContainer extends Component {
 }
 
 DeclareContainer.propTypes = {
-  types: PropTypes.array
+  types: PropTypes.object
 }
 
 export default DeclareContainer;
