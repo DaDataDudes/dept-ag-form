@@ -5,39 +5,8 @@ import { reduxForm } from 'redux-form';
 import DeclareContainer from './DeclareContainer';
 import LabeledInput from '../components/LabeledInput';
 import LabeledSelect from '../components/LabeledSelect';
-
-const plantTypes = {
-  fruitVeggies: 'Fresh Fruit & Vegetables',
-  cutFlowers: 'Cut Flowers & Foliage',
-  rootedPlants: 'Rooted Plants & Plant Cuttings, or Algae',
-  rawSeeds: 'Raw or Propagative Seeds or Bulbs',
-  soil: 'Soil, Growing Media, Sand, etc.',
-  seafood: 'Live Seafood (lobsters, clams, oysters, etc.)',
-  bacteria: 'Cultures of Bacteria, Fungi, Viruses, or Protozoa',
-  insects: 'Insects, Live Fishes, Amphibians, etc.'
-};
-
-const animalTypes = {
-  dog: 'Dogs',
-  cat: 'Cats',
-  bird: 'Birds',
-  reptiles: 'Reptiles (Turtles, Lizards, Snakes, etc.)',
-  other: 'Other Animals'
-};
-
-const islands = ['Oahu', 'Maui', 'Big Island', 'Kauai', 'Molokai', 'Lanai'];
-
-const rangeOption = ['0', '1', '2', '3', '4', '5+'];
-
-const airlines = ['Hawaiian',
-  'United',
-  'Delta',
-  'Virgin America',
-  'Alaska',
-  'jetBlue',
-  'Korean Air',
-  'Japan Airlines',
-  'ANA'];
+import Disclaimer from '../components/Disclaimer';
+import consts from '../consts/formPage';
 
 class FormPage extends Component {
 
@@ -61,9 +30,13 @@ class FormPage extends Component {
     return (
       <div>
         <header>State of Hawai'i Department of Agriculture</header>
+        <Disclaimer greeting={consts.greetings.greeting} />
+        <Disclaimer statement={consts.statements.statement} />
+        <p> One adult memeber of a family may complete this
+        declaration for other family members.</p>
         <form onSubmit={handleSubmit}>
-          <DeclareContainer types={plantTypes} />
-          <DeclareContainer types={animalTypes} />
+          <DeclareContainer types={consts.plantTypes} />
+          <DeclareContainer types={consts.animalTypes} />
           <h4>Contact Information</h4>
           <LabeledInput placeholder="First Name" field={firstName} />
           <LabeledInput placeholder="Last Name" field={lastName} />
@@ -75,7 +48,7 @@ class FormPage extends Component {
           <LabeledSelect
             label="Island"
             field={island}
-            options={islands}
+            options={consts.islands}
             defaultValue="Select an Island"
           />
           <LabeledInput placeholder="Phone Number" field={phone} />
@@ -83,13 +56,13 @@ class FormPage extends Component {
           <LabeledSelect
             label="Size of Party"
             field={party}
-            options={rangeOption}
+            options={consts.rangeOption}
             defaultValue="0"
           />
           <LabeledSelect
             label="Airline"
             field={airline}
-            options={airlines}
+            options={consts.airlines}
             defaultValue="Select Airline"
           />
           <LabeledInput placeholder="Flight Number" field={number} />
