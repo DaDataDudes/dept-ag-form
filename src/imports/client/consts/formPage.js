@@ -21,7 +21,7 @@ const animalTypes = {
 
 const islands = ['Oahu', 'Maui', 'Big Island', 'Kauai', 'Molokai', 'Lanai'];
 
-const rangeOption = ['0', '1', '2', '3', '4', '5+'];
+const rangeOption = ['1', '2', '3', '4', '5+'];
 
 const airlines = ['Hawaiian',
   'United',
