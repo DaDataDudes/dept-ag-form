@@ -12,13 +12,16 @@
     "express": "^4.13.4",
     "graphql": "^0.5.0",
     "graphql-tools": "^0.3.8",
+    "handsontable": "github:handsontable/handsontable",
     "http-proxy-middleware": "^0.14.0",
     "invariant": "^2.2.1",
     "material-ui": "^0.15.0",
     "meteor-node-stubs": "~0.2.0",
+    "moment": "^2.13.0",
     "pg": "^4.5.5",
     "pg-hstore": "^2.3.2",
     "pg-native": "^1.10.0",
+    "pikaday": "^1.4.0",
     "react": "^15.0.1",
     "react-addons-pure-render-mixin": "^15.0.1",
     "react-apollo": "^0.3.1",
@@ -31,7 +34,8 @@
     "redux": "^3.5.2",
     "redux-form": "^5.2.3",
     "redux-logger": "^2.6.1",
-    "sequelize": "^3.22.0"
+    "sequelize": "^3.22.0",
+    "zeroclipboard": "^2.2.0"
   },
   "devDependencies": {
     "babel": "^6.5.2",
