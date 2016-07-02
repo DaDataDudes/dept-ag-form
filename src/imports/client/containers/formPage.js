@@ -10,6 +10,20 @@ import consts from '../consts/formPage';
 
 class FormPage extends Component {
 
+
+  static propTypes = {
+    fields: PropTypes.obect
+  };
+
+  constructor(props) {
+    super(props);
+    this.handleSubmit = this._handleSubmit.bind(this);
+  }
+
+  _handleSubmit(data) {
+    console.log('data', data);
+  }
+
   render() {
     const { fields: {
       firstName,
@@ -24,8 +38,8 @@ class FormPage extends Component {
       email,
       party,
       airline,
-      number },
-      handleSubmit } = this.props;
+      number }
+      } = this.props;
 
     return (
       <div>
@@ -34,7 +48,7 @@ class FormPage extends Component {
         <Disclaimer statement={consts.statements.statement} />
         <p> One adult memeber of a family may complete this
         declaration for other family members.</p>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={this.handleSubmit}>
           <DeclareContainer types={consts.plantTypes} />
           <DeclareContainer types={consts.animalTypes} />
           <h4>Contact Information</h4>

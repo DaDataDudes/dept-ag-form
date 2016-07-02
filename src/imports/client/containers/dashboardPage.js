@@ -12,14 +12,17 @@ class DashboardPage extends Component {
     const hot = new Handsontable(container, {
       rowHeaders: true,
       colHeaders: true,
-      data: [[1, 2, 3], [4, 5, 6]]
+      data: [['First Name', 'Last Name', 'Declared Plants', 'Declared Animals'], ['John', 'Snow', 'No', 'Wolf']]
     });
   }
 
   render() {
     return (
-      <div id="testing"></div>
-    )
+      <div>
+        <h4>State of Hawaii Department of Agriculture</h4>
+        <div id="testing"></div>
+      </div>
+    );
   }
 
 }
