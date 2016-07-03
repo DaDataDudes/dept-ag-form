@@ -80,7 +80,6 @@ class FormPage extends Component {
             defaultValue="Select Airline"
           />
           <LabeledInput placeholder="Flight Number" field={number} />
-          <button type="submit">Submit</button>
         </form>
       </div>
     );

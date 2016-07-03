@@ -2,8 +2,16 @@ import React, { Component, PropTypes } from 'react';
 import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import defaultChecked from 'material-ui/Checkbox';
-import Declare from '../components/Declare';
+import Checkbox from 'material-ui/Checkbox';
+import TextField from 'material-ui/TextField';
+
+const styles = {
+  checkbox: {
+    marginBottom: 5
+  }
+};
+
+const muiTheme = getMuiTheme(lightBaseTheme);
 
 class DeclareContainer extends Component {
   constructor(props) {
@@ -16,29 +24,41 @@ class DeclareContainer extends Component {
     }, {});
   }
 
+  declareValues = (event) => {
+    if (event.key === 'Enter') {
+      const declare = event.target.value;
+      const id = event.target.id;
+      if (id in this.state) {
+        console.log('success', id);
+        this.setState({
+          id: declare
+        });
+      }
+    }
+    console.log('do something', this.state);
+  }
+
   render() {
     const { types } = this.props;
 
     return (
-      <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
+      <MuiThemeProvider muiTheme={muiTheme}>
         <div>
           <h4> A) I have the following items in my possession and/or baggage </h4>
             {Object.keys(this.state).map(field =>
               <label key={field}>
-                <defaultChecked
-                  type="checkbox"
+                <Checkbox
+                  // label={field}
+                  styles={styles.checkbox}
                   checked={this.state[ field ]}
-                  onChange={event => this.setState({ [ field ]: event.target.checked })}
+                  onCheck={event => this.setState({ [ field ]: event.target.checked })}
                 /> {types[ field ]}
+
+                <br />
+                {this.state[ field ] ? <TextField hintText={field} id={field} onKeyDown={this.declareValues} /> : ''}
               </label>
               )}
         </div>
-        <Declare
-          types={types}
-          fields={Object
-            .keys(this.state)
-            .filter(field => this.state[ field ])}
-        />
       </MuiThemeProvider>
     );
   }
