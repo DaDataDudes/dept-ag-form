@@ -7,6 +7,7 @@ export default class WelcomePage extends Component {
       <div>
         <h1>Aloha and welcome to Hawaii!</h1>
         <Link to="form"><button>Get Started</button></Link>
+        <Link to="dashboard"><button>Dashboard</button></Link>
       </div>
     );
   }

@@ -17,9 +17,13 @@ class DeclareContainer extends Component {
   constructor(props) {
     super(props);
     const { types } = this.props;
+    // console.log('types.disc',types.disc);
 
     this.state = Object.keys(types).reduce((previous, field) => {
       previous[ field ] = false;
+      // if ('disc' in previous[ field ]) {
+
+      // }
       return previous;
     }, {});
   }
@@ -46,18 +50,16 @@ class DeclareContainer extends Component {
         <div>
           <h4> A) I have the following items in my possession and/or baggage </h4>
             {Object.keys(this.state).map(field =>
-              <label key={field}>
+              <div>
                 <Checkbox
-                  // label={field}
+                  label={types[ field ]}
                   styles={styles.checkbox}
                   checked={this.state[ field ]}
                   onCheck={event => this.setState({ [ field ]: event.target.checked })}
-                /> {types[ field ]}
-
-                <br />
-                {this.state[ field ] ? <TextField hintText={field} id={field} onKeyDown={this.declareValues} /> : ''}
-              </label>
-              )}
+                />
+                {this.state[ field ] !== null ? <TextField hintText={types[ field ]} id={field} onKeyDown={this.declareValues} /> : ''}
+              </div>
+            )}
         </div>
       </MuiThemeProvider>
     );

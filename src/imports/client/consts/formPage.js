@@ -10,6 +10,45 @@ const plantTypes = {
   none: 'None'
 };
 
+const plantTypesB = {
+  fruitVeggies: {
+    disc: 'Fresh Fruit & Vegetables',
+    declare: []
+  },
+  cutFlowers: {
+    disc: 'Cut Flowers & Foliage',
+    declare: []
+  },
+  rootedPlants: {
+    disc: 'Rooted Plants & Plant Cuttings, or Algae',
+    declare: []
+  },
+  rawSeeds: {
+    disc: 'Raw or Propagative Seeds or Bulbs',
+    declare: []
+  },
+  soil: {
+    disc: 'Soil, Growing Media, Sand, etc.',
+    declare: []
+  },
+  seafood: {
+    disc: 'Live Seafood (lobsters, clams, oysters, etc.)',
+    declare: []
+  },
+  bacteria: {
+    disc: 'Cultures of Bacteria, Fungi, Viruses, or Protozoa',
+    declare: []
+  },
+  insects: {
+    disc: 'Insects, Live Fishes, Amphibians, etc.',
+    declare: []
+  },
+  none: {
+    disc: 'None',
+    declare: []
+  }
+};
+
 const animalTypes = {
   dog: 'Dogs',
   cat: 'Cats',
@@ -55,6 +94,7 @@ const statements = {
 
 export default {
   plantTypes,
+  plantTypesB,
   animalTypes,
   islands,
   rangeOption,
