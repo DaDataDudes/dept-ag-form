@@ -38,7 +38,7 @@ class DeclareContainer extends Component {
         this.setState({
           render: true,
           declare: declared
-        });
+        });a
       }
     }
     console.log('do something', this.state);
