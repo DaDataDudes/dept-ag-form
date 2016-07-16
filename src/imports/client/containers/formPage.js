@@ -1,6 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { browserHistory } from 'react-router';
 import { reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
+import { formActions as actions } from '../reducers/formReducer';
+
 //created Declare.js components and DeclareContainer container
 import DeclareContainer from './DeclareContainer';
 import LabeledInput from '../components/LabeledInput';
@@ -9,8 +12,6 @@ import Disclaimer from '../components/Disclaimer';
 import consts from '../consts/formPage';
 
 class FormPage extends Component {
-
-
   static propTypes = {
     fields: PropTypes.obect
   };
@@ -18,29 +19,18 @@ class FormPage extends Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this._handleSubmit.bind(this);
+    this.onChange = this._onChange.bind(this);
   }
 
-  _handleSubmit(data) {
-    console.log('data', data);
+  _onChange(e) {
+    e.preventDefault();
+  }
+
+  _handleSubmit(e) {
+    e.preventDefault();
   }
 
   render() {
-    const { fields: {
-      firstName,
-      lastName,
-      address,
-      city,
-      state,
-      zip,
-      hotel,
-      island,
-      phone,
-      email,
-      party,
-      airline,
-      number }
-      } = this.props;
-
     return (
       <div>
         <header>State of Hawai'i Department of Agriculture</header>
@@ -52,48 +42,38 @@ class FormPage extends Component {
           <DeclareContainer types={consts.plantTypes} />
           <DeclareContainer types={consts.animalTypes} />
           <h4>Contact Information</h4>
-          <LabeledInput placeholder="First Name" field={firstName} />
-          <LabeledInput placeholder="Last Name" field={lastName} />
-          <LabeledInput placeholder="Home Address" field={address} />
-          <LabeledInput placeholder="City" field={city} />
-          <LabeledInput placeholder="State" field={state} />
-          <LabeledInput placeholder="Zip Code" field={zip} />
-          <LabeledInput placeholder="Hotel or Lodging" field={hotel} />
+          <LabeledInput placeholder="First Name" />
+          <LabeledInput placeholder="Last Name"  />
+          <LabeledInput placeholder="Home Address" />
+          <LabeledInput placeholder="City" />
+          <LabeledInput placeholder="State" />
+          <LabeledInput placeholder="Zip Code" />
+          <LabeledInput placeholder="Hotel or Lodging" />
           <LabeledSelect
             label="Island"
-            field={island}
             options={consts.islands}
             defaultValue="Select an Island"
           />
-          <LabeledInput placeholder="Phone Number" field={phone} />
-          <LabeledInput placeholder="Email" field={email} />
+          <LabeledInput placeholder="Phone Number" />
+          <LabeledInput placeholder="Email" />
           <LabeledSelect
             label="Size of Party"
-            field={party}
             options={consts.rangeOption}
             defaultValue="0"
           />
           <LabeledSelect
             label="Airline"
-            field={airline}
             options={consts.airlines}
             defaultValue="Select Airline"
           />
-          <LabeledInput placeholder="Flight Number" field={number} />
+          <LabeledInput placeholder="Flight Number" />
+          <button type="submit">Hello</button>
         </form>
       </div>
     );
   }
 }
 
-export default reduxForm({
-  form: 'departmentOfAg',
-  fields: [
-    'firstName', 'lastName', 'address',
-    'city', 'state', 'zip',
-    'hotel', 'island', 'phone',
-    'email', 'party', 'airline',
-    'number'
-  ]
-})(FormPage);
+const stateToProps = (state) => state;
 
+export default connect(stateToProps, actions)(FormPage);
