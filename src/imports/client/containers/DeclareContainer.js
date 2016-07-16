@@ -17,25 +17,27 @@ class DeclareContainer extends Component {
   constructor(props) {
     super(props);
     const { types } = this.props;
-    // console.log('types.disc',types.disc);
 
     this.state = Object.keys(types).reduce((previous, field) => {
-      previous[ field ] = false;
-      // if ('disc' in previous[ field ]) {
-
-      // }
+      // previous[ field ] = false;
+      previous[ field ] = {
+        render: false,
+        declare: []
+      };
       return previous;
     }, {});
+    console.log('this.state', this.state);
   }
 
   declareValues = (event) => {
     if (event.key === 'Enter') {
-      const declare = event.target.value;
+      const declared = event.target.value;
       const id = event.target.id;
       if (id in this.state) {
-        console.log('success', id);
+        console.log('success', declared);
         this.setState({
-          id: declare
+          render: true,
+          declare: declared
         });
       }
     }
@@ -54,10 +56,13 @@ class DeclareContainer extends Component {
                 <Checkbox
                   label={types[ field ]}
                   styles={styles.checkbox}
-                  checked={this.state[ field ]}
-                  onCheck={event => this.setState({ [ field ]: event.target.checked })}
+                  checked={this.state[ field ].render}
+                  onCheck={event => this.setState({ [ field ]: {
+                    render: event.target.checked,
+                    declare: []
+                  } })}
                 />
-                {this.state[ field ] === true ? <TextField hintText={types[ field ]} id={field} onKeyDown={this.declareValues} /> : ''}
+                {this.state[ field ].render === true ? <TextField hintText={types[ field ]} id={field} onKeyDown={this.declareValues} /> : ''}
               </div>
             )}
         </div>
