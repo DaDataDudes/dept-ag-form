@@ -57,7 +57,7 @@ class DeclareContainer extends Component {
                   checked={this.state[ field ]}
                   onCheck={event => this.setState({ [ field ]: event.target.checked })}
                 />
-                {this.state[ field ] !== null ? <TextField hintText={types[ field ]} id={field} onKeyDown={this.declareValues} /> : ''}
+                {this.state[ field ] === true ? <TextField hintText={types[ field ]} id={field} onKeyDown={this.declareValues} /> : ''}
               </div>
             )}
         </div>
