@@ -11,12 +11,12 @@ const GRAPHQL_PORT = 4000;
 const graphQLServer = express();
 
 graphQLServer.use('/graphql', apolloServer(async () => {
-    return {
-      graphiql: true,
-      pretty: true,
-      schema,
-      resolvers
-    };
+  return {
+    graphiql: true,
+    pretty: true,
+    schema,
+    resolvers
+  };
 }));
 
 graphQLServer.listen(GRAPHQL_PORT, () => console.log(

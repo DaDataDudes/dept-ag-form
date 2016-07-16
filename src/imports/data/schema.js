@@ -1,18 +1,18 @@
 export const schema = [`
   type Form {
-    id: String
+    _id: String
   }
 
-  type Mutation {
-    submitForm(id: String): Form
+  type RootQuery {
+    form(_id: String): Form
   }
 
-  type Query {
-    form(id: String): Form
+  type RootMutation {
+    submitForm(_id: String): Form
   }
 
   schema {
-    query: Query
-    mutation: Mutation;
+    query: RootQuery
+    mutation: RootMutation;
   }
 `];
