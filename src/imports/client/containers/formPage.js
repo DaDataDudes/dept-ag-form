@@ -28,9 +28,12 @@ class FormPage extends Component {
 
   _handleSubmit(e) {
     e.preventDefault();
+    const { form: { errors, formData } } = this.props;
+    this.props.submitForm(formData);
   }
 
   render() {
+    const { form } = this.props;
     return (
       <div>
         <header>State of Hawai'i Department of Agriculture</header>
