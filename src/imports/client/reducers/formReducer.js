@@ -5,12 +5,14 @@ const action = (type, data, path = null) => {
   { type, data };
 };
 
+// Actions for the FormPage container get declared here
 const PROP_UPDATED         = 'PROP_UPDATED';
 
 const SUBMIT_FORM          = 'SUBMIT_FORM';
 const SUBMIT_FORM_SUCCESS  = 'SUBMIT_FORM_SUCCESS';
 const SUBMIT_FORM_FAILED   = 'SUBMIT_FORM_FAILED';
 
+// The actual functions for actions go here
 export const formActions = {
 	propUpdated: data => action(PROP_UPDATED, data),
   
@@ -19,6 +21,7 @@ export const formActions = {
   submitFormFailed: data => action(SUBMIT_FORM_FAILED, data),
 };
 
+// This is the initialState object that loads the first time a container is entered
 const initialState = {
   formData: {},
   errors: {},
@@ -33,6 +36,8 @@ const initialState = {
   ]
 };
 
+// The reducer function is responsible for changing state by taking the data 
+//  provided by an action and appending it to the current state object
 export default function formReducer(state = initialState, { type, data }) {
   switch (type) {
     case PROP_UPDATED:
