@@ -21,7 +21,16 @@ export const formActions = {
 
 const initialState = {
   formData: {},
-  errors: {}
+  errors: {},
+  contactInputs: [
+    { placeholder: 'First Name', name: 'firstName' },
+    { placeholder: 'Last Name', name: 'lastName' },
+    { placeholder: 'Home Address', name: 'homeAddress' },
+    { placeholder: 'City', name: 'city' },
+    { placeholder: 'State', name: 'state' },
+    { placeholder: 'Zip Code', name: 'zipCode' },
+    { placeholder: 'Hotel or Lodging', name: 'hotelOrLodging' }
+  ]
 };
 
 export default function formReducer(state = initialState, { type, data }) {

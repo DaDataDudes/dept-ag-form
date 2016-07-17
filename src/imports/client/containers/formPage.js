@@ -54,13 +54,13 @@ class FormPage extends Component {
           <DeclareContainer types={consts.plantTypes} />
           <DeclareContainer types={consts.animalTypes} />
           <h4>Contact Information</h4>
-          <LabeledInput placeholder="First Name" name="firstName" onChange={this.onChange} />
-          <LabeledInput placeholder="Last Name" name="lastName" onChange={this.onChange} />
-          <LabeledInput placeholder="Home Address" name="homeAddress" onChange={this.onChange} />
-          <LabeledInput placeholder="City" name="city" onChange={this.onChange} />
-          <LabeledInput placeholder="State" name="state" onChange={this.onChange} />
-          <LabeledInput placeholder="Zip Code" name="zipCode" onChange={this.onChange} />
-          <LabeledInput placeholder="Hotel or Lodging" name="hotelOrLodging" onChange={this.onChange} />
+          {form.contactInputs.map(input => 
+            <LabeledInput 
+              key={input.name}
+              placeholder={input.placeholder}
+              name={input.name}
+              onChange={this.onChange}/>
+          )}
           <LabeledSelect
             label="Island"
             options={consts.islands}
