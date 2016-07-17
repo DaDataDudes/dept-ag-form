@@ -13,7 +13,10 @@ import consts from '../consts/formPage';
 
 class FormPage extends Component {
   static propTypes = {
-    fields: PropTypes.obect
+    form: PropTypes.shape({
+      formData: PropTypes.object.isRequired,
+      errors: PropTypes.object
+    }).isRequired
   };
 
   constructor(props) {
@@ -24,6 +27,9 @@ class FormPage extends Component {
 
   _onChange(e) {
     e.preventDefault();
+    const { target: { value }, name } = e;
+    console.log(value, 'value');
+    console.log(name, 'name');
   }
 
   _handleSubmit(e) {
@@ -45,20 +51,20 @@ class FormPage extends Component {
           <DeclareContainer types={consts.plantTypes} />
           <DeclareContainer types={consts.animalTypes} />
           <h4>Contact Information</h4>
-          <LabeledInput placeholder="First Name" />
-          <LabeledInput placeholder="Last Name"  />
-          <LabeledInput placeholder="Home Address" />
-          <LabeledInput placeholder="City" />
-          <LabeledInput placeholder="State" />
-          <LabeledInput placeholder="Zip Code" />
-          <LabeledInput placeholder="Hotel or Lodging" />
+          <LabeledInput placeholder="First Name" name="firstName" />
+          <LabeledInput placeholder="Last Name" name="lastName"  />
+          <LabeledInput placeholder="Home Address" name="homeAddress" />
+          <LabeledInput placeholder="City" name="city" />
+          <LabeledInput placeholder="State" name="state" />
+          <LabeledInput placeholder="Zip Code" name="zipCode" />
+          <LabeledInput placeholder="Hotel or Lodging" name="hotelOrLodging" />
           <LabeledSelect
             label="Island"
             options={consts.islands}
             defaultValue="Select an Island"
           />
-          <LabeledInput placeholder="Phone Number" />
-          <LabeledInput placeholder="Email" />
+          <LabeledInput placeholder="Phone Number" name="phoneNumber" />
+          <LabeledInput placeholder="Email" name="email" />
           <LabeledSelect
             label="Size of Party"
             options={consts.rangeOption}
@@ -69,7 +75,7 @@ class FormPage extends Component {
             options={consts.airlines}
             defaultValue="Select Airline"
           />
-          <LabeledInput placeholder="Flight Number" />
+          <LabeledInput placeholder="Flight Number" name="flightNumber" />
           <button type="submit">Hello</button>
         </form>
       </div>
