@@ -27,7 +27,7 @@ const initialState = {
 export default function formReducer(state = initialState, { type, data }) {
   switch (type) {
     case PROP_UPDATED:
-      return data;
+      return {...state, formData: data};
 
     default: {
       return state;

@@ -27,9 +27,12 @@ class FormPage extends Component {
 
   _onChange(e) {
     e.preventDefault();
-    const { target: { value }, name } = e;
-    console.log(value, 'value');
-    console.log(name, 'name');
+    const { target, target: { value } } = e;
+    const { form: { formData } } = this.props;
+
+    const attribute = target.getAttribute('name');
+    const updatedForm = {...formData, [attribute]: value};
+    this.props.propUpdated(updatedForm);
   }
 
   _handleSubmit(e) {
@@ -51,20 +54,20 @@ class FormPage extends Component {
           <DeclareContainer types={consts.plantTypes} />
           <DeclareContainer types={consts.animalTypes} />
           <h4>Contact Information</h4>
-          <LabeledInput placeholder="First Name" name="firstName" />
-          <LabeledInput placeholder="Last Name" name="lastName"  />
-          <LabeledInput placeholder="Home Address" name="homeAddress" />
-          <LabeledInput placeholder="City" name="city" />
-          <LabeledInput placeholder="State" name="state" />
-          <LabeledInput placeholder="Zip Code" name="zipCode" />
-          <LabeledInput placeholder="Hotel or Lodging" name="hotelOrLodging" />
+          <LabeledInput placeholder="First Name" name="firstName" onChange={this.onChange} />
+          <LabeledInput placeholder="Last Name" name="lastName" onChange={this.onChange} />
+          <LabeledInput placeholder="Home Address" name="homeAddress" onChange={this.onChange} />
+          <LabeledInput placeholder="City" name="city" onChange={this.onChange} />
+          <LabeledInput placeholder="State" name="state" onChange={this.onChange} />
+          <LabeledInput placeholder="Zip Code" name="zipCode" onChange={this.onChange} />
+          <LabeledInput placeholder="Hotel or Lodging" name="hotelOrLodging" onChange={this.onChange} />
           <LabeledSelect
             label="Island"
             options={consts.islands}
             defaultValue="Select an Island"
           />
-          <LabeledInput placeholder="Phone Number" name="phoneNumber" />
-          <LabeledInput placeholder="Email" name="email" />
+          <LabeledInput placeholder="Phone Number" name="phoneNumber" onChange={this.onChange} />
+          <LabeledInput placeholder="Email" name="email" onChange={this.onChange} />
           <LabeledSelect
             label="Size of Party"
             options={consts.rangeOption}
@@ -75,7 +78,7 @@ class FormPage extends Component {
             options={consts.airlines}
             defaultValue="Select Airline"
           />
-          <LabeledInput placeholder="Flight Number" name="flightNumber" />
+          <LabeledInput placeholder="Flight Number" name="flightNumber" onChange={this.onChange} />
           <button type="submit">Hello</button>
         </form>
       </div>
