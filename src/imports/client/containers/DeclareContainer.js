@@ -27,16 +27,14 @@ class DeclareContainer extends Component {
       };
       return previous;
     }, {});
-    console.log('this.state', this.state);
   }
 
   declareValues = (event) => {
+    const declared = event.target.value;
+    const id = event.target.id;
     if (event.key === 'Enter') {
-      const declared = event.target.value;
-      const id = event.target.id;
       if (id in this.state) {
         const curDeclare = this.state[ id ];
-        console.log('success', curDeclare);
         this.setState({
           ...this.state,
           [ id ]: {
@@ -45,7 +43,7 @@ class DeclareContainer extends Component {
           }
         });
       }
-      return;
+      event.target.value = '';
     }
   }
 
@@ -67,19 +65,22 @@ class DeclareContainer extends Component {
                     declare: this.state[ field ].declare
                   } })}
                 />
-                {this.state[ field ].declare.length > 0 ?
-                  <div>
-                  {this.state[ field ].declare.map(item => <RadioButton label={item} />)}
-                  </div> :
-                  ''
-                }
                 {this.state[ field ].render === true ?
-                  <TextField
-                    hintText={types[ field ]}
-                    id={field}
-                    onKeyDown={this.declareValues}
-                  /> :
-                  ''
+                  <div>
+                    {this.state[ field ].declare.length > 0 ?
+                      <div>
+                      {this.state[ field ].declare.map(item => <RadioButton label={item} />)}
+                      </div> :
+                      ''
+                    }
+                    <TextField
+                      hintText={types[ field ]}
+                      id={field}
+                      onKeyDown={this.declareValues}
+                    />
+                  </div>
+                    :
+                    ''
                 }
               </div>
             )}
