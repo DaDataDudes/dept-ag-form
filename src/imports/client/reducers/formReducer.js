@@ -23,7 +23,22 @@ export const formActions = {
 
 // This is the initialState object that loads the first time a container is entered
 const initialState = {
-  formData: {},
+  formData: {
+    fruitVeggies: false,
+    cutFlowers: false,
+    rootedPlants: false,
+    rawSeeds: false,
+    soil: false,
+    seafood: false,
+    bacteria: false,
+    insects: false,
+    dog: false,
+    cat: false,
+    bird: false,
+    reptiles: false,
+    other: false,
+    none: false
+  },
   errors: {},
   contactInputs: [
     { placeholder: 'First Name', name: 'firstName' },

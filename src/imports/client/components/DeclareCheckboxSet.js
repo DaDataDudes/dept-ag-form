@@ -13,24 +13,25 @@ const styles = {
 
 const muiTheme = getMuiTheme(lightBaseTheme);
 
-const DeclareCheckboxSet = ({ types, onChange }) => {
-    return (
-      <MuiThemeProvider muiTheme={muiTheme}>
-        <div>
-          <h4> A) I have the following items in my possession and/or baggage </h4>
-            {Object.keys(this.state).map(field =>
-              <div>
-                <Checkbox
-                  label={types[field]}
-                  styles={styles.checkbox}
-                  onChange={onChange}
-                />
-                {this.state[ field ].render === true ? <TextField hintText={types[ field ]} id={field} onKeyDown={this.declareValues} /> : ''}
-              </div>
-            )}
-        </div>
-      </MuiThemeProvider>
-    );
+const DeclareCheckboxSet = ({ types, onChange, formData }) => {
+  return (
+    <MuiThemeProvider muiTheme={muiTheme}>
+      <div>
+        <h4> A) I have the following items in my possession and/or baggage </h4>
+          {Object.keys(types).map(field =>
+            <div>
+              <Checkbox
+                name={field}
+                label={types[field]}
+                styles={styles.checkbox}
+                checked={formData[field]}
+                onCheck={onChange}
+              />
+            </div>
+          )}
+      </div>
+    </MuiThemeProvider>
+  );
 };
 
 DeclareCheckboxSet.propTypes = {

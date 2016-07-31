@@ -27,13 +27,15 @@ class FormPage extends Component {
 
   // Used by all input elements to change state
   _onChange(e) {
-    const { target, type, target: { value } } = e;
-    console.log(type, 'type');
-    e.preventDefault();
+    const { target, target: { value, type, checked } } = e;
+    if (type !== 'checkbox') e.preventDefault();
+
     const { form: { formData } } = this.props;
     const attribute = target.getAttribute('name');
+    let val = value;
+    if (type === 'checkbox') val = checked;
 
-    const updatedForm = {...formData, [attribute]: value};
+    const updatedForm = {...formData, [attribute]: val};
     this.props.propUpdated(updatedForm);
   }
 
@@ -49,7 +51,7 @@ class FormPage extends Component {
   }
 
   render() {
-    const { form } = this.props;
+    const { form, form: { formData } } = this.props;
     return (
       <div>
         <header>State of Hawai'i Department of Agriculture</header>
@@ -58,8 +60,14 @@ class FormPage extends Component {
         <p> One adult memeber of a family may complete this
         declaration for other family members.</p>
         <form onSubmit={this.handleSubmit}>
-          <DeclareCheckboxSet types={consts.plantTypes} onChange={this.onChange} />
-          <DeclareCheckboxSet types={consts.animalTypes} onChange={this.onChange} />
+          <DeclareCheckboxSet 
+            types={consts.plantTypes} 
+            onChange={this.onChange} 
+            formData={formData} />
+          <DeclareCheckboxSet 
+            types={consts.animalTypes} 
+            onChange={this.onChange} 
+            formData={formData} />
           <h4>Contact Information</h4>
           {form.contactInputs.map((input, i) => 
             <LabeledInput 
@@ -99,10 +107,6 @@ class FormPage extends Component {
   }
 }
 
-// Here we add the current state object to this.props so it is accessible in the render() method
-// Ideally, we return only the parts of state we need, but for now, the entire state object
-// will do.
 const stateToProps = (state) => state;
 
-// Putting it all together
 export default connect(stateToProps, actions)(FormPage);
