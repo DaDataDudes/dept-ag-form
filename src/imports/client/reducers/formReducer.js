@@ -77,8 +77,6 @@ const initialState = {
   ]
 };
 
-// The reducer function is responsible for changing state by taking the data 
-//  provided by an action and appending it to the current state object
 export default function formReducer(state = initialState, { type, data }) {
   switch (type) {
     case PROP_UPDATED:

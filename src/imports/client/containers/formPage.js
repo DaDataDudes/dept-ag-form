@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import { browserHistory } from 'react-router';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-// This gives the container access to the actions contained within it's corresponding reducer file
 import { formActions as actions } from '../reducers/formReducer';
 
 import DeclareCheckboxSet from '../components/DeclareCheckboxSet';

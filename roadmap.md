@@ -24,7 +24,7 @@ Takes the existing Department of Agriculture form, and puts it into a beautiful 
 
 ### This is an example of how we want the component/container structure to look like.
 ```
-  <Form />
+  <Form>
     <Header /> --> Text
     <Disclaimer /> --> Text
     <DeclarePlants /> --> Checkbox
@@ -33,6 +33,7 @@ Takes the existing Department of Agriculture form, and puts it into a beautiful 
     <TravelInfo /> --> Dropdown
     <Signature /> --> Button
   </Form>
+  
 ```
 
 It should take advantage of Redux actions to manage state within the form.
