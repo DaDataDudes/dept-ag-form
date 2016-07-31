@@ -34,15 +34,9 @@ class FormPage extends Component {
     e.preventDefault();
     const { target, target: { value } } = e;
     const { form: { formData } } = this.props;
-
-    // Getting the input element by name
     const attribute = target.getAttribute('name');
 
-    // Updating the form data by returning the current data and changing the 
-    // value of the input selected 
     const updatedForm = {...formData, [attribute]: value};
-
-    // Finally, call the action to fire the state change
     this.props.propUpdated(updatedForm);
   }
 
@@ -70,15 +64,17 @@ class FormPage extends Component {
           <DeclareContainer types={consts.plantTypes} />
           <DeclareContainer types={consts.animalTypes} />
           <h4>Contact Information</h4>
-          {form.contactInputs.map(input => 
+          {form.contactInputs.map((input, i) => 
             <LabeledInput 
-              key={input.name}
+              key={i}
               placeholder={input.placeholder}
               name={input.name}
               onChange={this.onChange}/>
           )}
           <LabeledSelect
             label="Island"
+            name="island"
+            onChange={this.onChange}
             options={consts.islands}
             defaultValue="Select an Island"
           />
@@ -86,11 +82,15 @@ class FormPage extends Component {
           <LabeledInput placeholder="Email" name="email" onChange={this.onChange} />
           <LabeledSelect
             label="Size of Party"
+            name="partySize"
+            onChange={this.onChange}
             options={consts.rangeOption}
             defaultValue="0"
           />
           <LabeledSelect
             label="Airline"
+            name="airline"
+            onChange={this.onChange}
             options={consts.airlines}
             defaultValue="Select Airline"
           />
