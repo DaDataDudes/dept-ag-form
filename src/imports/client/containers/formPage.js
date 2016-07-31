@@ -5,8 +5,7 @@ import { connect } from 'react-redux';
 // This gives the container access to the actions contained within it's corresponding reducer file
 import { formActions as actions } from '../reducers/formReducer';
 
-//created Declare.js components and DeclareContainer container
-import DeclareContainer from './DeclareContainer';
+import DeclareCheckboxSet from '../components/DeclareCheckboxSet';
 import LabeledInput from '../components/LabeledInput';
 import LabeledSelect from '../components/LabeledSelect';
 import Disclaimer from '../components/Disclaimer';
@@ -20,9 +19,6 @@ class FormPage extends Component {
     }).isRequired
   };
 
-  // All methods defined below that aren't native to react must be bound to 'this' here.
-  // This gives us the ability to keep the methods within scope without creating a new instance
-  // of a func each time it is called. *more performant*
   constructor(props) {
     super(props);
     this.handleSubmit = this._handleSubmit.bind(this);
@@ -31,8 +27,9 @@ class FormPage extends Component {
 
   // Used by all input elements to change state
   _onChange(e) {
+    const { target, type, target: { value } } = e;
+    console.log(type, 'type');
     e.preventDefault();
-    const { target, target: { value } } = e;
     const { form: { formData } } = this.props;
     const attribute = target.getAttribute('name');
 
@@ -61,8 +58,8 @@ class FormPage extends Component {
         <p> One adult memeber of a family may complete this
         declaration for other family members.</p>
         <form onSubmit={this.handleSubmit}>
-          <DeclareContainer types={consts.plantTypes} />
-          <DeclareContainer types={consts.animalTypes} />
+          <DeclareCheckboxSet types={consts.plantTypes} onChange={this.onChange} />
+          <DeclareCheckboxSet types={consts.animalTypes} onChange={this.onChange} />
           <h4>Contact Information</h4>
           {form.contactInputs.map((input, i) => 
             <LabeledInput 
