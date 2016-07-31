@@ -6,12 +6,13 @@ import TextField from 'material-ui/TextField';
 
 const muiTheme = getMuiTheme(lightBaseTheme);
 
-const LabeledInput = ({ placeholder, onChange, name, error }) => (
+const LabeledInput = ({ placeholder, onChange, name, error, id }) => (
   <MuiThemeProvider muiTheme={muiTheme}>
     <div>
       <TextField 
         type="text" 
-        name={name} 
+        name={name}
+        id={id} 
         placeholder={placeholder} 
         onChange={onChange} 
         errorText={error} />

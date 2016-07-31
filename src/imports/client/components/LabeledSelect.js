@@ -1,9 +1,17 @@
 import React, { PropTypes } from 'react';
 
-const LabeledSelect = ({ label, field, options, defaultValue, onChange, name }) => (
+const LabeledSelect = ({ 
+  label, 
+  field, 
+  options, 
+  defaultValue, 
+  onChange, 
+  name, 
+  id
+}) => (
   <div>
     <label>{label}</label>
-    <select name={name} onChange={onChange} {...field}>
+    <select name={name} id={id} onChange={onChange} {...field}>
       <option value="">{defaultValue}</option>
      {options.map((selection, index) =>
        <option value={selection} key={index}>{selection}

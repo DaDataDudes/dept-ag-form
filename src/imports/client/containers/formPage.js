@@ -25,31 +25,59 @@ class FormPage extends Component {
     this.onChange = this._onChange.bind(this);
   }
 
-  // Used by all input elements to change state
   _onChange(e) {
-    const { target, target: { value, type, checked } } = e;
+    const { target, target: { value, type, checked, tagName } } = e;
+    
     if (type !== 'checkbox') e.preventDefault();
-
     const { form: { formData } } = this.props;
+    const category = target.getAttribute('id');
     const attribute = target.getAttribute('name');
     let val = value;
-    if (type === 'checkbox') val = checked;
 
-    const updatedForm = {...formData, [attribute]: val};
+    if (type === 'checkbox') val = checked;
+    const updatedForm = Object.assign({}, formData, {
+      [category]: {
+        ...formData[category],
+        [attribute]: val
+      }
+    });
     this.props.propUpdated(updatedForm);
   }
 
-  // Used by the submit button. Grabs form data from state
   _handleSubmit(e) {
     e.preventDefault();
-    // Grab form data from state
-    const { form: { errors, formData }, addError, submitForm } = this.props;
-    if (!formData.firstName) {
-      addError({firstName: 'Please enter your first name'});
-    }
+    const { 
+      form: { 
+        errors, 
+        formData 
+      }, 
+      addFormError,
+      clearErrors, 
+      submitForm 
+    } = this.props;
 
-    if (errors) return;
-    // Call the action that will trigger the API call to POST formData
+    clearErrors();
+    let formErrors = {};
+    Object.keys(formData.contactInfo).map((fieldKey) => {
+      if (fieldKey === 'partySize') {
+        return formData.contactInfo[fieldKey] === 0 ? 
+          formErrors = {
+            ...formErrors, 
+            partySize: 'Please provide the number of people in your party'
+          }
+          : null;
+      }
+      if (formData.contactInfo[fieldKey] === '') {
+        formErrors = {
+          ...formErrors, 
+          [fieldKey]: 'This field is required'
+        };
+      }
+    });
+
+    if (Object.keys(formErrors).length > 0) {
+      return addFormError(formErrors);
+    }
     submitForm(formData);
   }
 
@@ -75,6 +103,7 @@ class FormPage extends Component {
           {form.contactInputs.map(({name, placeholder}, i) => 
             <LabeledInput 
               key={i}
+              id="contactInfo"
               error={errors[name]}
               placeholder={placeholder}
               name={name}
@@ -83,14 +112,26 @@ class FormPage extends Component {
           <LabeledSelect
             label="Island"
             name="island"
+            id="contactInfo"
             onChange={this.onChange}
             options={consts.islands}
             defaultValue="Select an Island" />
-          <LabeledInput placeholder="Phone Number" name="phoneNumber" onChange={this.onChange} />
-          <LabeledInput placeholder="Email" name="email" onChange={this.onChange} />
+          <LabeledInput 
+            placeholder="Phone Number" 
+            name="phoneNumber" 
+            id="contactInfo"
+            onChange={this.onChange} 
+            error={errors['phoneNumber']} />
+          <LabeledInput 
+            placeholder="Email" 
+            name="email" 
+            id="contactInfo"
+            onChange={this.onChange}
+            error={errors['email']} />
           <LabeledSelect
             label="Size of Party"
             name="partySize"
+            id="contactInfo"
             onChange={this.onChange}
             options={consts.rangeOption}
             defaultValue="0"
@@ -98,11 +139,17 @@ class FormPage extends Component {
           <LabeledSelect
             label="Airline"
             name="airline"
+            id="contactInfo"
             onChange={this.onChange}
             options={consts.airlines}
             defaultValue="Select Airline"
           />
-          <LabeledInput placeholder="Flight Number" name="flightNumber" onChange={this.onChange} />
+          <LabeledInput 
+            placeholder="Flight Number" 
+            name="flightNumber" 
+            id="contactInfo"
+            onChange={this.onChange} 
+            error={errors['flightNumber']} />
           <button type="submit">Hello</button>
         </form>
       </div>
