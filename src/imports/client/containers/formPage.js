@@ -42,16 +42,19 @@ class FormPage extends Component {
   // Used by the submit button. Grabs form data from state
   _handleSubmit(e) {
     e.preventDefault();
-
     // Grab form data from state
-    const { form: { errors, formData } } = this.props;
+    const { form: { errors, formData }, addError, submitForm } = this.props;
+    if (!formData.firstName) {
+      addError({firstName: 'Please enter your first name'});
+    }
 
+    if (errors) return;
     // Call the action that will trigger the API call to POST formData
-    this.props.submitForm(formData);
+    submitForm(formData);
   }
 
   render() {
-    const { form, form: { formData } } = this.props;
+    const { form, form: { formData, errors } } = this.props;
     return (
       <div>
         <header>State of Hawai'i Department of Agriculture</header>
@@ -69,20 +72,20 @@ class FormPage extends Component {
             onChange={this.onChange} 
             formData={formData} />
           <h4>Contact Information</h4>
-          {form.contactInputs.map((input, i) => 
+          {form.contactInputs.map(({name, placeholder}, i) => 
             <LabeledInput 
               key={i}
-              placeholder={input.placeholder}
-              name={input.name}
-              onChange={this.onChange}/>
+              error={errors[name]}
+              placeholder={placeholder}
+              name={name}
+              onChange={this.onChange} />
           )}
           <LabeledSelect
             label="Island"
             name="island"
             onChange={this.onChange}
             options={consts.islands}
-            defaultValue="Select an Island"
-          />
+            defaultValue="Select an Island" />
           <LabeledInput placeholder="Phone Number" name="phoneNumber" onChange={this.onChange} />
           <LabeledInput placeholder="Email" name="email" onChange={this.onChange} />
           <LabeledSelect
