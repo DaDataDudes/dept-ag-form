@@ -91,10 +91,12 @@ class FormPage extends Component {
         declaration for other family members.</p>
         <form onSubmit={this.handleSubmit}>
           <DeclareCheckboxSet 
+            id="declarePlants"
             types={consts.plantTypes} 
             onChange={this.onChange} 
             formData={formData} />
           <DeclareCheckboxSet 
+            id="declareAnimals"
             types={consts.animalTypes} 
             onChange={this.onChange} 
             formData={formData} />

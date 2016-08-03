@@ -12,7 +12,7 @@ const styles = {
 
 const muiTheme = getMuiTheme(lightBaseTheme);
 
-const DeclareCheckboxSet = ({ types, onChange, formData }) => {
+const DeclareCheckboxSet = ({ types, onChange, formData, id }) => {
   return (
     <MuiThemeProvider muiTheme={muiTheme}>
       <div>
@@ -21,6 +21,7 @@ const DeclareCheckboxSet = ({ types, onChange, formData }) => {
             <div>
               <Checkbox
                 name={field}
+                id={id}
                 label={types[field]}
                 styles={styles.checkbox}
                 checked={formData[field]}
