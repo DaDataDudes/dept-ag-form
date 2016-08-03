@@ -1,13 +1,13 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
-import apolloClient from 'imports/client/apollo-client';
+import client from './apollo-client';
 import createLogger from 'redux-logger';
 import { reducer as formReducer } from 'redux-form';
 const rootReducer = combineReducers({
-  apollo: apolloClient.reducer(),
+  apollo: client.reducer(),
   form: formReducer
 });
 
-const middleware = [apolloClient.middleware(), createLogger()];
+const middleware = [client.middleware(), createLogger()];
 
 const enhancers = compose(
   applyMiddleware(...middleware),

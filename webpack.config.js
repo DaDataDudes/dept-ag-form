@@ -1,6 +1,5 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const path = require('path');
 
 module.exports = {
   entry: './ui/index.js',
@@ -38,7 +37,7 @@ module.exports = {
     }
   },
   resolve: {
-    root: path.resolve('/'),
+    root: __dirname,
     modulesDirectories: ['node_modules'],
     extensions: ['', '.js', '.json']
   }

@@ -28,7 +28,7 @@ class DeclareContainer extends Component {
     }, {});
   }
 
-  declareValues = (event) => {
+  declareValues(event) {
     if (event.key === 'Enter') {
       const declare = event.target.value;
       const id = event.target.id;

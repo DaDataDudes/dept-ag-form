@@ -1,26 +1,25 @@
 import express from 'express';
-import { apolloServer } from 'apollo-server';
-import proxyMiddleware from 'http-proxy-middleware';
-import { schema } from 'imports/data/schema';
-import resolvers from 'imports/data/resolvers';
-import { WebApp } from 'meteor/webapp';
+import { apolloExpress } from 'apollo-server';
+import bodyParser from 'body-parser';
 import 'babel-polyfill';
+
+import { schema } from './schema';
+import resolvers from './resolvers';
 
 const GRAPHQL_PORT = 4000;
 
-const graphQLServer = express();
+const app = express();
 
-graphQLServer.use('/graphql', apolloServer(async () => {
-  return {
-    graphiql: true,
-    pretty: true,
-    schema,
-    resolvers
-  };
-}));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
-graphQLServer.listen(GRAPHQL_PORT, () => console.log(
+app.use('/graphql', apolloExpress(() => ({
+  graphiql: true,
+  pretty: true,
+  schema,
+  resolvers
+})));
+
+app.listen(GRAPHQL_PORT, () => console.log(
   `GraphQL Server is now running on http://localhost:${GRAPHQL_PORT}`
 ));
-
-WebApp.rawConnectHandlers.use(proxyMiddleware(`http://localhost:${GRAPHQL_PORT}/graphql`));

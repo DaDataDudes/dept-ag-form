@@ -10,11 +10,6 @@ import consts from '../consts/formPage';
 
 class FormPage extends Component {
 
-
-  static propTypes = {
-    fields: PropTypes.obect
-  };
-
   constructor(props) {
     super(props);
     this.handleSubmit = this._handleSubmit.bind(this);
@@ -86,6 +81,10 @@ class FormPage extends Component {
   }
 }
 
+FormPage.propTypes = {
+  fields: PropTypes.obect
+};
+
 export default reduxForm({
   form: 'departmentOfAg',
   fields: [
@@ -96,4 +95,3 @@ export default reduxForm({
     'number'
   ]
 })(FormPage);
-
