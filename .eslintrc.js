@@ -29,7 +29,7 @@ module.exports = {
     'computed-property-spacing': [ 2, 'always' ],
     'eqeqeq': [ 2, 'smart' ],
     'indent': [ 2, 2, { 'VariableDeclarator': 2 } ],
-    'import/no-unresolved': [ 2, { "ignore": ["^meteor/", "imports/", "client/", "server/"] } ],
+    'import/no-unresolved': [ 2, { "ignore": ["ui", "api"] } ],
     'linebreak-style': [ 2, 'unix' ],
     'no-console': [ 0 ],
     'no-underscore-dangle': [ 0 ],

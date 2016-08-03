@@ -1,5 +1,5 @@
-import { apolloServer } from 'graphql-tools';
 import express from 'express';
+import { apolloServer } from 'apollo-server';
 import proxyMiddleware from 'http-proxy-middleware';
 import { schema } from 'imports/data/schema';
 import resolvers from 'imports/data/resolvers';

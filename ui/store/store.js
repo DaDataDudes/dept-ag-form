@@ -3,8 +3,8 @@ import apolloClient from 'imports/client/apollo-client';
 import createLogger from 'redux-logger';
 import { reducer as formReducer } from 'redux-form';
 const rootReducer = combineReducers({
- apollo: apolloClient.reducer(),
- form: formReducer
+  apollo: apolloClient.reducer(),
+  form: formReducer
 });
 
 const middleware = [apolloClient.middleware(), createLogger()];
