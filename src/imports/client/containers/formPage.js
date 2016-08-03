@@ -22,6 +22,7 @@ class FormPage extends Component {
     super(props);
     this.handleSubmit = this._handleSubmit.bind(this);
     this.onChange = this._onChange.bind(this);
+    this.onTextChange = this._onTextChange.bind(this);
   }
 
   _onChange(e) {
@@ -41,6 +42,11 @@ class FormPage extends Component {
       }
     });
     this.props.propUpdated(updatedForm);
+  }
+
+  _onTextChange(e) {
+    const { target } = e;
+    console.log('Im typing in text wooooo', target.value);
   }
 
   _handleSubmit(e) {
@@ -91,15 +97,17 @@ class FormPage extends Component {
         declaration for other family members.</p>
         <form onSubmit={this.handleSubmit}>
           <DeclareCheckboxSet
+            id="declarePlants"
             types={consts.plantTypes}
             onChange={this.onChange}
-            formData={formData}
-          />
+            onTextChange={this.onTextChange}
+            formData={formData} />
           <DeclareCheckboxSet
+            id="declareAnimals"
             types={consts.animalTypes}
             onChange={this.onChange}
-            formData={formData}
-          />
+            onTextChange={this.onTextChange}
+            formData={formData} />
           <h4>Contact Information</h4>
           {form.contactInputs.map(({ name, placeholder }, i) =>
             <LabeledInput
