@@ -3,6 +3,7 @@ import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import Checkbox from 'material-ui/Checkbox';
+import TextField from 'material-ui/TextField';
 
 const styles = {
   checkbox: {
@@ -12,7 +13,7 @@ const styles = {
 
 const muiTheme = getMuiTheme(lightBaseTheme);
 
-const DeclareCheckboxSet = ({ types, onChange, formData, id }) => {
+const DeclareCheckboxSet = ({ types, onChange, onTextChange, formData, id }) => {
   return (
     <MuiThemeProvider muiTheme={muiTheme}>
       <div>
@@ -27,6 +28,13 @@ const DeclareCheckboxSet = ({ types, onChange, formData, id }) => {
                 checked={formData[id][field]}
                 onCheck={onChange}
               />
+              {formData[id][field] && 
+                <TextField 
+                  type="text" 
+                  name={field}
+                  id={id}  
+                  onChange={onTextChange} />
+              }
             </div>
           )}
       </div>
