@@ -26,7 +26,7 @@ class FormPage extends Component {
 
   _onChange(e) {
     const { target, target: { value, type, checked, tagName } } = e;
-    
+
     if (type !== 'checkbox') e.preventDefault();
     const { form: { formData } } = this.props;
     const category = target.getAttribute('id');
@@ -35,9 +35,9 @@ class FormPage extends Component {
 
     if (type === 'checkbox') val = checked;
     const updatedForm = Object.assign({}, formData, {
-      [category]: {
-        ...formData[category],
-        [attribute]: val
+      [ category ]: {
+        ...formData[ category ],
+        [ attribute ]: val
       }
     });
     this.props.propUpdated(updatedForm);
@@ -45,31 +45,31 @@ class FormPage extends Component {
 
   _handleSubmit(e) {
     e.preventDefault();
-    const { 
-      form: { 
-        errors, 
-        formData 
-      }, 
+    const {
+      form: {
+        errors,
+        formData
+      },
       addFormError,
-      clearErrors, 
-      submitForm 
+      clearErrors,
+      submitForm
     } = this.props;
 
     clearErrors();
     let formErrors = {};
     Object.keys(formData.contactInfo).map((fieldKey) => {
       if (fieldKey === 'partySize') {
-        return formData.contactInfo[fieldKey] === 0 ? 
+        return formData.contactInfo[ fieldKey ] === 0 ?
           formErrors = {
-            ...formErrors, 
+            ...formErrors,
             partySize: 'Please provide the number of people in your party'
           }
           : null;
       }
-      if (formData.contactInfo[fieldKey] === '') {
+      if (formData.contactInfo[ fieldKey ] === '') {
         formErrors = {
-          ...formErrors, 
-          [fieldKey]: 'This field is required'
+          ...formErrors,
+          [ fieldKey ]: 'This field is required'
         };
       }
     });
@@ -90,23 +90,26 @@ class FormPage extends Component {
         <p> One adult memeber of a family may complete this
         declaration for other family members.</p>
         <form onSubmit={this.handleSubmit}>
-          <DeclareCheckboxSet 
-            types={consts.plantTypes} 
-            onChange={this.onChange} 
-            formData={formData} />
-          <DeclareCheckboxSet 
-            types={consts.animalTypes} 
-            onChange={this.onChange} 
-            formData={formData} />
+          <DeclareCheckboxSet
+            types={consts.plantTypes}
+            onChange={this.onChange}
+            formData={formData}
+          />
+          <DeclareCheckboxSet
+            types={consts.animalTypes}
+            onChange={this.onChange}
+            formData={formData}
+          />
           <h4>Contact Information</h4>
-          {form.contactInputs.map(({name, placeholder}, i) => 
-            <LabeledInput 
+          {form.contactInputs.map(({ name, placeholder }, i) =>
+            <LabeledInput
               key={i}
               id="contactInfo"
-              error={errors[name]}
+              error={errors[ name ]}
               placeholder={placeholder}
               name={name}
-              onChange={this.onChange} />
+              onChange={this.onChange}
+            />
           )}
           <LabeledSelect
             label="Island"
@@ -114,19 +117,22 @@ class FormPage extends Component {
             id="contactInfo"
             onChange={this.onChange}
             options={consts.islands}
-            defaultValue="Select an Island" />
-          <LabeledInput 
-            placeholder="Phone Number" 
-            name="phoneNumber" 
-            id="contactInfo"
-            onChange={this.onChange} 
-            error={errors['phoneNumber']} />
-          <LabeledInput 
-            placeholder="Email" 
-            name="email" 
+            defaultValue="Select an Island"
+          />
+          <LabeledInput
+            placeholder="Phone Number"
+            name="phoneNumber"
             id="contactInfo"
             onChange={this.onChange}
-            error={errors['email']} />
+            error={errors[ 'phoneNumber' ]}
+          />
+          <LabeledInput
+            placeholder="Email"
+            name="email"
+            id="contactInfo"
+            onChange={this.onChange}
+            error={errors[ 'email' ]}
+          />
           <LabeledSelect
             label="Size of Party"
             name="partySize"
@@ -143,12 +149,13 @@ class FormPage extends Component {
             options={consts.airlines}
             defaultValue="Select Airline"
           />
-          <LabeledInput 
-            placeholder="Flight Number" 
-            name="flightNumber" 
+          <LabeledInput
+            placeholder="Flight Number"
+            name="flightNumber"
             id="contactInfo"
-            onChange={this.onChange} 
-            error={errors['flightNumber']} />
+            onChange={this.onChange}
+            error={errors[ 'flightNumber' ]}
+          />
           <button type="submit">Hello</button>
         </form>
       </div>

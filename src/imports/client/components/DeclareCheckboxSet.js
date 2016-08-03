@@ -21,9 +21,9 @@ const DeclareCheckboxSet = ({ types, onChange, formData }) => {
             <div>
               <Checkbox
                 name={field}
-                label={types[field]}
+                label={types[ field ]}
                 styles={styles.checkbox}
-                checked={formData[field]}
+                checked={formData[ field ]}
                 onCheck={onChange}
               />
             </div>

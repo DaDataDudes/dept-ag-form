@@ -1,6 +1,6 @@
 // => { type: CONST, data } (path optional)
 const action = (type, data, path = null) => {
-  return path?
+  return path ?
   { type, data, meta: { transition: () => ({ pathname: path }) } } :
   { type, data };
 };
@@ -21,10 +21,9 @@ export const formActions = {
 
   addFormError: data => action(ADD_FORM_ERROR, data),
   clearErrors: () => action(CLEAR_ERRORS),
-  
   submitForm: data => action(SUBMIT_FORM, data),
   submitFormSuccess: data => action(SUBMIT_FORM_SUCCESS, data),
-  submitFormFailed: data => action(SUBMIT_FORM_FAILED, data),
+  submitFormFailed: data => action(SUBMIT_FORM_FAILED, data)
 };
 
 // This is the initialState object that loads the first time a container is entered
@@ -79,17 +78,17 @@ const initialState = {
 
 export default function formReducer(state = initialState, { type, data }) {
   switch (type) {
-    case PROP_UPDATED:
-      return {...state, formData: data};
+  case PROP_UPDATED:
+    return { ...state, formData: data };
 
-    case ADD_FORM_ERROR:
-      return {...state, errors: data};
+  case ADD_FORM_ERROR:
+    return { ...state, errors: data };
 
-    case CLEAR_ERRORS:
-      return {...state, errors: {}};
+  case CLEAR_ERRORS:
+    return { ...state, errors: {} };
 
-    default: {
-      return state;
-    }
+  default: {
+    return state;
+  }
   }
 }
