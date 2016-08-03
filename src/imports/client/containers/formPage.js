@@ -44,8 +44,9 @@ class FormPage extends Component {
     this.props.propUpdated(updatedForm);
   }
 
-  _onTextChange() {
-
+  _onTextChange(e) {
+    const { target } = e;
+    console.log('Im typing in text wooooo', target.value);
   }
 
   _handleSubmit(e) {
