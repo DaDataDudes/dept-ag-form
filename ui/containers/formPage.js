@@ -11,12 +11,6 @@ import Disclaimer from '../components/Disclaimer';
 import consts from '../consts/formPage';
 
 class FormPage extends Component {
-  static propTypes = {
-    form: PropTypes.shape({
-      formData: PropTypes.object.isRequired,
-      errors: PropTypes.object
-    }).isRequired
-  };
 
   constructor(props) {
     super(props);
@@ -27,7 +21,7 @@ class FormPage extends Component {
 
   _onChange(e) {
     const { target, target: { value, type, checked, tagName } } = e;
-    
+
     if (type !== 'checkbox') e.preventDefault();
     const { form: { formData } } = this.props;
     const category = target.getAttribute('id');
@@ -51,30 +45,30 @@ class FormPage extends Component {
 
   _handleSubmit(e) {
     e.preventDefault();
-    const { 
-      form: { 
-        errors, 
-        formData 
-      }, 
+    const {
+      form: {
+        errors,
+        formData
+      },
       addFormError,
-      clearErrors, 
-      submitForm 
+      clearErrors,
+      submitForm
     } = this.props;
 
     clearErrors();
     let formErrors = {};
     Object.keys(formData.contactInfo).map((fieldKey) => {
       if (fieldKey === 'partySize') {
-        return formData.contactInfo[fieldKey] === 0 ? 
+        return formData.contactInfo[fieldKey] === 0 ?
           formErrors = {
-            ...formErrors, 
+            ...formErrors,
             partySize: 'Please provide the number of people in your party'
           }
           : null;
       }
       if (formData.contactInfo[fieldKey] === '') {
         formErrors = {
-          ...formErrors, 
+          ...formErrors,
           [fieldKey]: 'This field is required'
         };
       }
@@ -96,21 +90,21 @@ class FormPage extends Component {
         <p> One adult memeber of a family may complete this
         declaration for other family members.</p>
         <form onSubmit={this.handleSubmit}>
-          <DeclareCheckboxSet 
+          <DeclareCheckboxSet
             id="declarePlants"
-            types={consts.plantTypes} 
-            onChange={this.onChange} 
+            types={consts.plantTypes}
+            onChange={this.onChange}
             onTextChange={this.onTextChange}
             formData={formData} />
-          <DeclareCheckboxSet 
+          <DeclareCheckboxSet
             id="declareAnimals"
-            types={consts.animalTypes} 
+            types={consts.animalTypes}
             onChange={this.onChange}
-            onTextChange={this.onTextChange} 
+            onTextChange={this.onTextChange}
             formData={formData} />
           <h4>Contact Information</h4>
-          {form.contactInputs.map(({name, placeholder}, i) => 
-            <LabeledInput 
+          {form.contactInputs.map(({name, placeholder}, i) =>
+            <LabeledInput
               key={i}
               id="contactInfo"
               error={errors[name]}
@@ -125,15 +119,15 @@ class FormPage extends Component {
             onChange={this.onChange}
             options={consts.islands}
             defaultValue="Select an Island" />
-          <LabeledInput 
-            placeholder="Phone Number" 
-            name="phoneNumber" 
+          <LabeledInput
+            placeholder="Phone Number"
+            name="phoneNumber"
             id="contactInfo"
-            onChange={this.onChange} 
+            onChange={this.onChange}
             error={errors['phoneNumber']} />
-          <LabeledInput 
-            placeholder="Email" 
-            name="email" 
+          <LabeledInput
+            placeholder="Email"
+            name="email"
             id="contactInfo"
             onChange={this.onChange}
             error={errors['email']} />
@@ -153,11 +147,11 @@ class FormPage extends Component {
             options={consts.airlines}
             defaultValue="Select Airline"
           />
-          <LabeledInput 
-            placeholder="Flight Number" 
-            name="flightNumber" 
+          <LabeledInput
+            placeholder="Flight Number"
+            name="flightNumber"
             id="contactInfo"
-            onChange={this.onChange} 
+            onChange={this.onChange}
             error={errors['flightNumber']} />
           <button type="submit">Hello</button>
         </form>
@@ -166,6 +160,12 @@ class FormPage extends Component {
   }
 }
 
+FormPage.propTypes = {
+  form: PropTypes.shape({
+    formData: PropTypes.object.isRequired,
+    errors: PropTypes.object
+  }).isRequired
+};
 const stateToProps = (state) => state;
 
 export default connect(stateToProps, actions)(FormPage);
