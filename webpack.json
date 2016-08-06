@@ -1,9 +1,0 @@
-{
-  "root": "src",
-  "devServer": {
-    "host": "localhost"
-  },
-  "resolve": {
-    "root":"src"
-  }
-}
