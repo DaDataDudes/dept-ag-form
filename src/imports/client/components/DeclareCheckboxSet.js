@@ -23,17 +23,18 @@ const DeclareCheckboxSet = ({ types, onChange, onTextChange, formData, id }) => 
               <Checkbox
                 name={field}
                 id={id}
-                label={types[field]}
+                label={types[ field ]}
                 styles={styles.checkbox}
-                checked={formData[id][field]}
+                checked={formData[ id ][ field ]}
                 onCheck={onChange}
               />
-              {formData[id][field] &&
+              {formData[ id ][ field ] &&
                 <TextField
                   type="text"
                   name={field}
                   id={id}
-                  onChange={onTextChange} />
+                  onKeyDown={onTextChange}
+                />
               }
             </div>
           )}

@@ -46,7 +46,38 @@ class FormPage extends Component {
 
   _onTextChange(e) {
     const { target } = e;
-    console.log('Im typing in text wooooo', target.value);
+    const declared = target.value;
+    const id = target.id;
+    if (e.key === 'Enter') {
+      console.log('hello');
+      const { form: { formData } } = this.props;
+      const category = target.getAttribute('id');
+      const attribute = target.getAttribute('name');
+
+      const updatedForm = Object.assign({}, formData, {
+        [ category ]: {
+          ...formData[ category ],
+          [ attribute ]: {
+            //need to finish this train of thought - reference old code
+            render: curDeclare.render,
+            declare: [...curDeclare.declare, declared]
+          }
+        }
+      });
+      this.props.propUpdated(updatedForm);
+      // if (id in this.state) {
+      //   const curDeclare = this.state[ id ];
+      //   this.setState({
+      //     ...this.state,
+      //     [ id ]: {
+      //       render: curDeclare.render,
+      //       declare: [...curDeclare.declare, declared]
+      //     }
+      //   });
+      // }
+      // event.target.value = '';
+    }
+    // console.log('Im typing in text wooooo', target.value);
   }
 
   _handleSubmit(e) {
@@ -101,13 +132,15 @@ class FormPage extends Component {
             types={consts.plantTypes}
             onChange={this.onChange}
             onTextChange={this.onTextChange}
-            formData={formData} />
+            formData={formData}
+          />
           <DeclareCheckboxSet
             id="declareAnimals"
             types={consts.animalTypes}
             onChange={this.onChange}
             onTextChange={this.onTextChange}
-            formData={formData} />
+            formData={formData}
+          />
           <h4>Contact Information</h4>
           {form.contactInputs.map(({ name, placeholder }, i) =>
             <LabeledInput
