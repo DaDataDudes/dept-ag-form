@@ -31,16 +31,34 @@ class FormPage extends Component {
     let val = value;
 
     if (type === 'checkbox') val = checked;
-    const updatedForm = Object.assign({}, formData, {
-      [ category ]: {
-        ...formData[ category ],
-        [ attribute ]: {
-          checked: val,
-          declared: formData[ category ][ attribute ].declared
+    if (attribute !== 'none') {
+      const updatedForm = Object.assign({}, formData, {
+        [ category ]: {
+          ...formData[ category ],
+          [ attribute ]: {
+            checked: val,
+            declared: formData[ category ][ attribute ].declared
+          },
+          none: {
+            checked: false,
+            declared: false
+          }
         }
-      }
-    });
-    this.props.propUpdated(updatedForm);
+      });
+      this.props.propUpdated(updatedForm);
+    } else {
+      const updateForm = Object.assign({}, formData, {
+        [ category ]: {
+          ...formData[ category ],
+          none: {
+            checked: val,
+            declared: false
+          }
+        }
+      });
+      console.log('updateNone', updateForm);
+      this.props.propUpdated(updateForm);
+    }
   }
 
   _onTextChange(e) {

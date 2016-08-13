@@ -6,6 +6,7 @@ import Checkbox from 'material-ui/Checkbox';
 import TextField from 'material-ui/TextField';
 import Chip from 'material-ui/Chip';
 
+const muiTheme = getMuiTheme(lightBaseTheme);
 const styles = {
   checkbox: {
     marginBottom: 5
@@ -19,13 +20,14 @@ const styles = {
   }
 };
 
-const muiTheme = getMuiTheme(lightBaseTheme);
-
 const DeclareCheckboxSet = ({ types, onChange, onTextChange, formData, removeItem, handleTouchTap, id }) => {
   return (
     <MuiThemeProvider muiTheme={muiTheme}>
       <div>
-        <h4> A) I have the following items in my possession and/or baggage </h4>
+        {id === 'declarePlants' ?
+          <h4> A) I have the following ORGANIC MATERIAL(s) in my possession and/or baggage </h4>
+          : <h4> B) I have the following ANIMAL(s) in my possession and/or baggage </h4>
+        }
           {Object.keys(types).map(field => {
             return (<div>
               <Checkbox
@@ -47,15 +49,19 @@ const DeclareCheckboxSet = ({ types, onChange, onTextChange, formData, removeIte
                         styles={styles.chip}
                       >
                         {item}
-                      </Chip>)}
+                      </Chip>)
+                    }
                   </div> : ''
                 }
+                {formData[ id ][ field ].declared !== false ?
                   <TextField
                     type="text"
                     name={field}
                     id={id}
                     onKeyDown={onTextChange}
                   />
+                  : null
+                }
                 </div> : null
               }
             </div>);
