@@ -17,6 +17,8 @@ class FormPage extends Component {
     this.handleSubmit = this._handleSubmit.bind(this);
     this.onChange = this._onChange.bind(this);
     this.onTextChange = this._onTextChange.bind(this);
+    this.removeItem = this._removeItem.bind(this);
+    this.handleTouchTap = this._handleTouchTap.bind(this);
   }
 
   _onChange(e) {
@@ -58,13 +60,30 @@ class FormPage extends Component {
         }
       });
       this.props.propUpdated(updatedForm);
+      e.target.value = '';
     }
   }
 
-  _removeItem(e) {
-    const { target, target: { value, type, checked, tagName } } = e;
-    const item = target.value;
-    console.log('item', item);
+  _removeItem(id, field, item) {
+    const { form: { formData } } = this.props;
+    const items = formData[ id ][ field ].declared;
+    const indexOfItem = items.indexOf(item);
+    items.splice(indexOfItem, 1);
+    const updatedForm = Object.assign({}, formData, {
+      [ id ]: {
+        ...formData[ id ],
+        [ field ]: {
+          checked: true,
+          declared: items
+        }
+      }
+    });
+    this.props.propUpdated(updatedForm);
+  }
+
+  _handleTouchTap() {
+    console.log('hello');
+    alert('Stupid Haole');
   }
 
   _handleSubmit(e) {
@@ -120,6 +139,7 @@ class FormPage extends Component {
             onChange={this.onChange}
             onTextChange={this.onTextChange}
             removeItem={this.removeItem}
+            handleTouchTap={this.handleTouchTap}
             formData={formData}
           />
           <DeclareCheckboxSet
@@ -128,6 +148,7 @@ class FormPage extends Component {
             onChange={this.onChange}
             onTextChange={this.onTextChange}
             removeItem={this.removeItem}
+            handleTouchTap={this.handleTouchTap}
             formData={formData}
           />
           <h4>Contact Information</h4>

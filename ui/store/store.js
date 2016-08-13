@@ -11,7 +11,8 @@ const middleware = [client.middleware(), createLogger()];
 
 const enhancers = compose(
   applyMiddleware(...middleware),
-  window.devToolsExtension()
+  (window.devToolsExtension && process.env.NODE_ENV !== 'production') ?
+   window.devToolsExtension() : f => f
 );
 
 const Store = createStore(rootReducer, {}, enhancers);

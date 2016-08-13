@@ -4,16 +4,24 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import Checkbox from 'material-ui/Checkbox';
 import TextField from 'material-ui/TextField';
+import Chip from 'material-ui/Chip';
 
 const styles = {
   checkbox: {
     marginBottom: 5
+  },
+  chip: {
+    margin: 4
+  },
+  wrapper: {
+    display: 'flex',
+    flexWrap: 'wrap'
   }
 };
 
 const muiTheme = getMuiTheme(lightBaseTheme);
 
-const DeclareCheckboxSet = ({ types, onChange, onTextChange, formData, removeItem, id }) => {
+const DeclareCheckboxSet = ({ types, onChange, onTextChange, formData, removeItem, handleTouchTap, id }) => {
   return (
     <MuiThemeProvider muiTheme={muiTheme}>
       <div>
@@ -33,10 +41,13 @@ const DeclareCheckboxSet = ({ types, onChange, onTextChange, formData, removeIte
                 {formData[ id ][ field ].declared.length > 0 ?
                   <div>
                     {formData[ id ][ field ].declared.map(item =>
-                      <Checkbox
-                        label={item}
-                        onCheck={removeItem}
-                      />)}
+                      <Chip
+                        onRequestDelete={() => removeItem(id, field, item)}
+                        onTouchTap={handleTouchTap}
+                        styles={styles.chip}
+                      >
+                        {item}
+                      </Chip>)}
                   </div> : ''
                 }
                   <TextField
