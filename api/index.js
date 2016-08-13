@@ -1,5 +1,5 @@
 import express from 'express';
-import { apolloExpress } from 'apollo-server';
+import { apolloExpress, graphiqlExpress } from 'apollo-server';
 import bodyParser from 'body-parser';
 import 'babel-polyfill';
 
@@ -12,6 +12,10 @@ const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+app.use('/graphiql', graphiqlExpress({
+  endpointURL: '/graphql'
+}));
 
 app.use('/graphql', apolloExpress(() => ({
   graphiql: true,
