@@ -1,12 +1,12 @@
 import React, { PropTypes } from 'react';
 
-const LabeledSelect = ({ 
-  label, 
-  field, 
-  options, 
-  defaultValue, 
-  onChange, 
-  name, 
+const LabeledSelect = ({
+  label,
+  field,
+  options,
+  defaultValue,
+  onChange,
+  name,
   id
 }) => (
   <div>

@@ -1,0 +1,1 @@
+{"head":"<title>Department of Agriculture Form</title>\n  <link rel=\"stylesheet\" media=\"screen\" href=\"../../node_modules/handsontable/dist/handsontable.full.css\">","body":"","js":"\nTemplate.body.addContent((function() {\n  var view = this;\n  return HTML.Raw('<div id=\"root\"></div>');\n}));\nMeteor.startup(Template.body.renderToDocument);\n","bodyAttrs":{}}

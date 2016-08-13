@@ -9,13 +9,14 @@ const muiTheme = getMuiTheme(lightBaseTheme);
 const LabeledInput = ({ placeholder, onChange, name, error, id }) => (
   <MuiThemeProvider muiTheme={muiTheme}>
     <div>
-      <TextField 
-        type="text" 
+      <TextField
+        type="text"
         name={name}
-        id={id} 
-        placeholder={placeholder} 
-        onChange={onChange} 
-        errorText={error} />
+        id={id}
+        placeholder={placeholder}
+        onChange={onChange}
+        errorText={error}
+      />
     </div>
   </MuiThemeProvider>
 );
@@ -27,4 +28,3 @@ LabeledInput.propTypes = {
 };
 
 export default LabeledInput;
-

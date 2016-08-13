@@ -30,9 +30,12 @@ class FormPage extends Component {
 
     if (type === 'checkbox') val = checked;
     const updatedForm = Object.assign({}, formData, {
-      [category]: {
-        ...formData[category],
-        [attribute]: val
+      [ category ]: {
+        ...formData[ category ],
+        [ attribute ]: {
+          checked: val,
+          declared: formData[ category ][ attribute ].declared
+        }
       }
     });
     this.props.propUpdated(updatedForm);
@@ -40,7 +43,28 @@ class FormPage extends Component {
 
   _onTextChange(e) {
     const { target } = e;
-    console.log('Im typing in text wooooo', target.value);
+    const declared = target.value;
+    if (e.key === 'Enter') {
+      const { form: { formData } } = this.props;
+      const category = target.getAttribute('id');
+      const attribute = target.getAttribute('name');
+      const updatedForm = Object.assign({}, formData, {
+        [ category ]: {
+          ...formData[ category ],
+          [ attribute ]: {
+            checked: true,
+            declared: [...formData[ category ][ attribute ].declared, declared]
+          }
+        }
+      });
+      this.props.propUpdated(updatedForm);
+    }
+  }
+
+  _removeItem(e) {
+    const { target, target: { value, type, checked, tagName } } = e;
+    const item = target.value;
+    console.log('item', item);
   }
 
   _handleSubmit(e) {
@@ -59,17 +83,17 @@ class FormPage extends Component {
     let formErrors = {};
     Object.keys(formData.contactInfo).map((fieldKey) => {
       if (fieldKey === 'partySize') {
-        return formData.contactInfo[fieldKey] === 0 ?
+        return formData.contactInfo[ fieldKey ] === 0 ?
           formErrors = {
             ...formErrors,
             partySize: 'Please provide the number of people in your party'
           }
           : null;
       }
-      if (formData.contactInfo[fieldKey] === '') {
+      if (formData.contactInfo[ fieldKey ] === '') {
         formErrors = {
           ...formErrors,
-          [fieldKey]: 'This field is required'
+          [ fieldKey ]: 'This field is required'
         };
       }
     });
@@ -95,22 +119,27 @@ class FormPage extends Component {
             types={consts.plantTypes}
             onChange={this.onChange}
             onTextChange={this.onTextChange}
-            formData={formData} />
+            removeItem={this.removeItem}
+            formData={formData}
+          />
           <DeclareCheckboxSet
             id="declareAnimals"
             types={consts.animalTypes}
             onChange={this.onChange}
             onTextChange={this.onTextChange}
-            formData={formData} />
+            removeItem={this.removeItem}
+            formData={formData}
+          />
           <h4>Contact Information</h4>
-          {form.contactInputs.map(({name, placeholder}, i) =>
+          {form.contactInputs.map(({ name, placeholder }, i) =>
             <LabeledInput
               key={i}
               id="contactInfo"
-              error={errors[name]}
+              error={errors[ name ]}
               placeholder={placeholder}
               name={name}
-              onChange={this.onChange} />
+              onChange={this.onChange}
+            />
           )}
           <LabeledSelect
             label="Island"
@@ -118,19 +147,22 @@ class FormPage extends Component {
             id="contactInfo"
             onChange={this.onChange}
             options={consts.islands}
-            defaultValue="Select an Island" />
+            defaultValue="Select an Island"
+          />
           <LabeledInput
             placeholder="Phone Number"
             name="phoneNumber"
             id="contactInfo"
             onChange={this.onChange}
-            error={errors['phoneNumber']} />
+            error={errors[ 'phoneNumber' ]}
+          />
           <LabeledInput
             placeholder="Email"
             name="email"
             id="contactInfo"
             onChange={this.onChange}
-            error={errors['email']} />
+            error={errors[ 'email' ]}
+          />
           <LabeledSelect
             label="Size of Party"
             name="partySize"
@@ -152,7 +184,8 @@ class FormPage extends Component {
             name="flightNumber"
             id="contactInfo"
             onChange={this.onChange}
-            error={errors['flightNumber']} />
+            error={errors[ 'flightNumber' ]}
+          />
           <button type="submit">Hello</button>
         </form>
       </div>
@@ -164,7 +197,8 @@ FormPage.propTypes = {
   form: PropTypes.shape({
     formData: PropTypes.object.isRequired,
     errors: PropTypes.object
-  }).isRequired
+  }).isRequired,
+  propUpdated: PropTypes.func.isRequired
 };
 const stateToProps = (state) => state;
 
