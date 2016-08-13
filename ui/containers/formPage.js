@@ -61,6 +61,12 @@ class FormPage extends Component {
     }
   }
 
+  _removeItem(e) {
+    const { target, target: { value, type, checked, tagName } } = e;
+    const item = target.value;
+    console.log('item', item);
+  }
+
   _handleSubmit(e) {
     e.preventDefault();
     const {
@@ -113,6 +119,7 @@ class FormPage extends Component {
             types={consts.plantTypes}
             onChange={this.onChange}
             onTextChange={this.onTextChange}
+            removeItem={this.removeItem}
             formData={formData}
           />
           <DeclareCheckboxSet
@@ -120,6 +127,7 @@ class FormPage extends Component {
             types={consts.animalTypes}
             onChange={this.onChange}
             onTextChange={this.onTextChange}
+            removeItem={this.removeItem}
             formData={formData}
           />
           <h4>Contact Information</h4>
