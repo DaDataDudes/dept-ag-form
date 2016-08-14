@@ -47,17 +47,25 @@ class FormPage extends Component {
       });
       this.props.propUpdated(updatedForm);
     } else {
-      const updateForm = Object.assign({}, formData, {
-        [ category ]: {
-          ...formData[ category ],
-          none: {
-            checked: val,
-            declared: false
+      Object.keys(formData[ category ]).map(item => {
+        console.log('item', item);
+        const updateForm = Object.assign({}, formData, {
+          [ category ]: {
+            ...formData[ category ],
+            [ item ]: {
+              checked: false,
+              declared: formData[ category ][ attribute ].declared
+            },
+            none: {
+              checked: val,
+              declared: false
+            }
           }
-        }
+        });
+        console.log('updateNone', updateForm);
+        this.props.propUpdated(updateForm);
+        return updateForm;
       });
-      console.log('updateNone', updateForm);
-      this.props.propUpdated(updateForm);
     }
   }
 
@@ -87,6 +95,7 @@ class FormPage extends Component {
     const items = formData[ id ][ field ].declared;
     const indexOfItem = items.indexOf(item);
     items.splice(indexOfItem, 1);
+
     const updatedForm = Object.assign({}, formData, {
       [ id ]: {
         ...formData[ id ],
