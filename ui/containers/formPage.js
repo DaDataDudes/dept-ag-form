@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { browserHistory } from 'react-router';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { formActions as actions } from '../reducers/formReducer';
+import { formActions as actions, initialState } from '../reducers/formReducer';
 
 import DeclareCheckboxSet from '../components/DeclareCheckboxSet';
 import LabeledInput from '../components/LabeledInput';
@@ -23,16 +23,17 @@ class FormPage extends Component {
 
   _onChange(e) {
     const { target, target: { value, type, checked, tagName } } = e;
+    let updatedForm = {};
+    const { form: { formData } } = this.props;
 
     if (type !== 'checkbox') e.preventDefault();
-    const { form: { formData } } = this.props;
     const category = target.getAttribute('id');
     const attribute = target.getAttribute('name');
     let val = value;
 
     if (type === 'checkbox') val = checked;
     if (attribute !== 'none') {
-      const updatedForm = Object.assign({}, formData, {
+      updatedForm = Object.assign({}, formData, {
         [ category ]: {
           ...formData[ category ],
           [ attribute ]: {
@@ -45,28 +46,18 @@ class FormPage extends Component {
           }
         }
       });
-      this.props.propUpdated(updatedForm);
     } else {
-      Object.keys(formData[ category ]).map(item => {
-        console.log('item', item);
-        const updateForm = Object.assign({}, formData, {
-          [ category ]: {
-            ...formData[ category ],
-            [ item ]: {
-              checked: false,
-              declared: formData[ category ][ attribute ].declared
-            },
-            none: {
-              checked: val,
-              declared: false
-            }
+      updatedForm = Object.assign({}, formData, {
+        [ category ]: {
+          ...initialState.formData[ category ],
+          none: {
+            checked: val,
+            declared: false
           }
-        });
-        console.log('updateNone', updateForm);
-        this.props.propUpdated(updateForm);
-        return updateForm;
+        }
       });
     }
+    this.props.propUpdated(updatedForm);
   }
 
   _onTextChange(e) {
@@ -246,7 +237,8 @@ FormPage.propTypes = {
     formData: PropTypes.object.isRequired,
     errors: PropTypes.object
   }).isRequired,
-  propUpdated: PropTypes.func.isRequired
+  propUpdated: PropTypes.func.isRequired,
+  reset: PropTypes.func.isRequired
 };
 const stateToProps = (state) => state;
 
