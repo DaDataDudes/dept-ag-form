@@ -105,6 +105,7 @@ class FormPage extends Component {
   }
 
   _handleSubmit(e) {
+    console.log('event', e);
     e.preventDefault();
     const {
       form: {
@@ -150,83 +151,81 @@ class FormPage extends Component {
         <Disclaimer statement={consts.statements.statement} />
         <p> One adult memeber of a family may complete this
         declaration for other family members.</p>
-        <form onSubmit={this.handleSubmit}>
-          <DeclareCheckboxSet
-            id="declarePlants"
-            types={consts.plantTypes}
-            onChange={this.onChange}
-            onTextChange={this.onTextChange}
-            removeItem={this.removeItem}
-            handleTouchTap={this.handleTouchTap}
-            formData={formData}
-          />
-          <DeclareCheckboxSet
-            id="declareAnimals"
-            types={consts.animalTypes}
-            onChange={this.onChange}
-            onTextChange={this.onTextChange}
-            removeItem={this.removeItem}
-            handleTouchTap={this.handleTouchTap}
-            formData={formData}
-          />
-          <h4>Contact Information</h4>
-          {form.contactInputs.map(({ name, placeholder }, i) =>
-            <LabeledInput
-              key={i}
-              id="contactInfo"
-              error={errors[ name ]}
-              placeholder={placeholder}
-              name={name}
-              onChange={this.onChange}
-            />
-          )}
-          <LabeledSelect
-            label="Island"
-            name="island"
-            id="contactInfo"
-            onChange={this.onChange}
-            options={consts.islands}
-            defaultValue="Select an Island"
-          />
+        <DeclareCheckboxSet
+          id="declarePlants"
+          types={consts.plantTypes}
+          onChange={this.onChange}
+          onTextChange={this.onTextChange}
+          removeItem={this.removeItem}
+          handleTouchTap={this.handleTouchTap}
+          formData={formData}
+        />
+        <DeclareCheckboxSet
+          id="declareAnimals"
+          types={consts.animalTypes}
+          onChange={this.onChange}
+          onTextChange={this.onTextChange}
+          removeItem={this.removeItem}
+          handleTouchTap={this.handleTouchTap}
+          formData={formData}
+        />
+        <h4>Contact Information</h4>
+        {form.contactInputs.map(({ name, placeholder }, i) =>
           <LabeledInput
-            placeholder="Phone Number"
-            name="phoneNumber"
+            key={i}
             id="contactInfo"
+            error={errors[ name ]}
+            placeholder={placeholder}
+            name={name}
             onChange={this.onChange}
-            error={errors[ 'phoneNumber' ]}
           />
-          <LabeledInput
-            placeholder="Email"
-            name="email"
-            id="contactInfo"
-            onChange={this.onChange}
-            error={errors[ 'email' ]}
-          />
-          <LabeledSelect
-            label="Size of Party"
-            name="partySize"
-            id="contactInfo"
-            onChange={this.onChange}
-            options={consts.rangeOption}
-            defaultValue="0"
-          />
-          <LabeledSelect
-            label="Airline"
-            name="airline"
-            id="contactInfo"
-            onChange={this.onChange}
-            options={consts.airlines}
-            defaultValue="Select Airline"
-          />
-          <LabeledInput
-            placeholder="Flight Number"
-            name="flightNumber"
-            id="contactInfo"
-            onChange={this.onChange}
-            error={errors[ 'flightNumber' ]}
-          />
-          <button type="submit">Hello</button>
-        </form>
+        )}
+        <LabeledSelect
+          label="Island"
+          name="island"
+          id="contactInfo"
+          onChange={this.onChange}
+          options={consts.islands}
+          defaultValue="Select an Island"
+        />
+        <LabeledInput
+          placeholder="Phone Number"
+          name="phoneNumber"
+          id="contactInfo"
+          onChange={this.onChange}
+          error={errors[ 'phoneNumber' ]}
+        />
+        <LabeledInput
+          placeholder="Email"
+          name="email"
+          id="contactInfo"
+          onChange={this.onChange}
+          error={errors[ 'email' ]}
+        />
+        <LabeledSelect
+          label="Size of Party"
+          name="partySize"
+          id="contactInfo"
+          onChange={this.onChange}
+          options={consts.rangeOption}
+          defaultValue="0"
+        />
+        <LabeledSelect
+          label="Airline"
+          name="airline"
+          id="contactInfo"
+          onChange={this.onChange}
+          options={consts.airlines}
+          defaultValue="Select Airline"
+        />
+        <LabeledInput
+          placeholder="Flight Number"
+          name="flightNumber"
+          id="contactInfo"
+          onChange={this.onChange}
+          error={errors[ 'flightNumber' ]}
+        />
+        <button onClick={this.handleSubmit} >Hello</button>
       </div>
     );
   }
