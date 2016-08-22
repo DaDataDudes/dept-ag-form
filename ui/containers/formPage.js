@@ -16,13 +16,14 @@ class FormPage extends Component {
     super(props);
     this.handleSubmit = this._handleSubmit.bind(this);
     this.onChange = this._onChange.bind(this);
+    this._onInfoUpdate = this._onInfoUpdate.bind(this);
     this.onTextChange = this._onTextChange.bind(this);
     this.removeItem = this._removeItem.bind(this);
     this.handleTouchTap = this._handleTouchTap.bind(this);
   }
 
   _onChange(e) {
-    const { target, target: { value, type, checked, tagName } } = e;
+    const { target, target: { value, type, checked } } = e;
     let updatedForm = {};
     const { form: { formData } } = this.props;
 
@@ -57,6 +58,25 @@ class FormPage extends Component {
         }
       });
     }
+    this.props.propUpdated(updatedForm);
+  }
+
+  _onInfoUpdate(e) {
+    const { target, target: { value, type } } = e;
+    let updatedForm = {};
+    const { form: { formData } } = this.props;
+
+    if (type !== 'checkbox') e.preventDefault();
+    const category = target.getAttribute('id');
+    const attribute = target.getAttribute('name');
+    const val = value;
+    console.log('onChange', category, attribute, val);
+    updatedForm = Object.assign({}, formData, {
+      [ category ]: {
+        ...formData[ category ],
+        [ attribute ]: val
+      }
+    });
     this.props.propUpdated(updatedForm);
   }
 
@@ -177,14 +197,14 @@ class FormPage extends Component {
             error={errors[ name ]}
             placeholder={placeholder}
             name={name}
-            onChange={this.onChange}
+            onChange={this._onInfoUpdate}
           />
         )}
         <LabeledSelect
           label="Island"
           name="island"
           id="contactInfo"
-          onChange={this.onChange}
+          onChange={this._onInfoUpdate}
           options={consts.islands}
           defaultValue="Select an Island"
         />
@@ -192,21 +212,21 @@ class FormPage extends Component {
           placeholder="Phone Number"
           name="phoneNumber"
           id="contactInfo"
-          onChange={this.onChange}
+          onChange={this._onInfoUpdate}
           error={errors[ 'phoneNumber' ]}
         />
         <LabeledInput
           placeholder="Email"
           name="email"
           id="contactInfo"
-          onChange={this.onChange}
+          onChange={this._onInfoUpdate}
           error={errors[ 'email' ]}
         />
         <LabeledSelect
           label="Size of Party"
           name="partySize"
           id="contactInfo"
-          onChange={this.onChange}
+          onChange={this._onInfoUpdate}
           options={consts.rangeOption}
           defaultValue="0"
         />
@@ -214,7 +234,7 @@ class FormPage extends Component {
           label="Airline"
           name="airline"
           id="contactInfo"
-          onChange={this.onChange}
+          onChange={this._onInfoUpdate}
           options={consts.airlines}
           defaultValue="Select Airline"
         />
@@ -222,7 +242,7 @@ class FormPage extends Component {
           placeholder="Flight Number"
           name="flightNumber"
           id="contactInfo"
-          onChange={this.onChange}
+          onChange={this._onInfoUpdate}
           error={errors[ 'flightNumber' ]}
         />
         <button onClick={this.handleSubmit} >Hello</button>
