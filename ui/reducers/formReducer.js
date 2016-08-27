@@ -27,7 +27,7 @@ export const formActions = {
 };
 
 // This is the initialState object that loads the first time a container is entered
-const initialState = {
+export const initialState = {
   formData: {
     declarePlants: {
       fruitVeggies: {

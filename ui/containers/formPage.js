@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { browserHistory } from 'react-router';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { formActions as actions } from '../reducers/formReducer';
+import { formActions as actions, initialState } from '../reducers/formReducer';
 
 import DeclareCheckboxSet from '../components/DeclareCheckboxSet';
 import LabeledInput from '../components/LabeledInput';
@@ -16,26 +16,65 @@ class FormPage extends Component {
     super(props);
     this.handleSubmit = this._handleSubmit.bind(this);
     this.onChange = this._onChange.bind(this);
+    this._onInfoUpdate = this._onInfoUpdate.bind(this);
     this.onTextChange = this._onTextChange.bind(this);
+    this.removeItem = this._removeItem.bind(this);
+    this.handleTouchTap = this._handleTouchTap.bind(this);
   }
 
   _onChange(e) {
-    const { target, target: { value, type, checked, tagName } } = e;
+    const { target, target: { value, type, checked } } = e;
+    let updatedForm = {};
+    const { form: { formData } } = this.props;
 
     if (type !== 'checkbox') e.preventDefault();
-    const { form: { formData } } = this.props;
     const category = target.getAttribute('id');
     const attribute = target.getAttribute('name');
     let val = value;
 
     if (type === 'checkbox') val = checked;
-    const updatedForm = Object.assign({}, formData, {
+    if (attribute !== 'none') {
+      updatedForm = Object.assign({}, formData, {
+        [ category ]: {
+          ...formData[ category ],
+          [ attribute ]: {
+            checked: val,
+            declared: formData[ category ][ attribute ].declared
+          },
+          none: {
+            checked: false,
+            declared: false
+          }
+        }
+      });
+    } else {
+      updatedForm = Object.assign({}, formData, {
+        [ category ]: {
+          ...initialState.formData[ category ],
+          none: {
+            checked: val,
+            declared: false
+          }
+        }
+      });
+    }
+    this.props.propUpdated(updatedForm);
+  }
+
+  _onInfoUpdate(e) {
+    const { target, target: { value, type } } = e;
+    let updatedForm = {};
+    const { form: { formData } } = this.props;
+
+    if (type !== 'checkbox') e.preventDefault();
+    const category = target.getAttribute('id');
+    const attribute = target.getAttribute('name');
+    const val = value;
+    console.log('onChange', category, attribute, val);
+    updatedForm = Object.assign({}, formData, {
       [ category ]: {
         ...formData[ category ],
-        [ attribute ]: {
-          checked: val,
-          declared: formData[ category ][ attribute ].declared
-        }
+        [ attribute ]: val
       }
     });
     this.props.propUpdated(updatedForm);
@@ -58,16 +97,35 @@ class FormPage extends Component {
         }
       });
       this.props.propUpdated(updatedForm);
+      e.target.value = '';
     }
   }
 
-  _removeItem(e) {
-    const { target, target: { value, type, checked, tagName } } = e;
-    const item = target.value;
-    console.log('item', item);
+  _removeItem(id, field, item) {
+    const { form: { formData } } = this.props;
+    const items = formData[ id ][ field ].declared;
+    const indexOfItem = items.indexOf(item);
+    items.splice(indexOfItem, 1);
+
+    const updatedForm = Object.assign({}, formData, {
+      [ id ]: {
+        ...formData[ id ],
+        [ field ]: {
+          checked: true,
+          declared: items
+        }
+      }
+    });
+    this.props.propUpdated(updatedForm);
+  }
+
+  _handleTouchTap() {
+    console.log('hello');
+    alert('Stupid Haole');
   }
 
   _handleSubmit(e) {
+    console.log('event', e);
     e.preventDefault();
     const {
       form: {
@@ -113,81 +171,81 @@ class FormPage extends Component {
         <Disclaimer statement={consts.statements.statement} />
         <p> One adult memeber of a family may complete this
         declaration for other family members.</p>
-        <form onSubmit={this.handleSubmit}>
-          <DeclareCheckboxSet
-            id="declarePlants"
-            types={consts.plantTypes}
-            onChange={this.onChange}
-            onTextChange={this.onTextChange}
-            removeItem={this.removeItem}
-            formData={formData}
-          />
-          <DeclareCheckboxSet
-            id="declareAnimals"
-            types={consts.animalTypes}
-            onChange={this.onChange}
-            onTextChange={this.onTextChange}
-            removeItem={this.removeItem}
-            formData={formData}
-          />
-          <h4>Contact Information</h4>
-          {form.contactInputs.map(({ name, placeholder }, i) =>
-            <LabeledInput
-              key={i}
-              id="contactInfo"
-              error={errors[ name ]}
-              placeholder={placeholder}
-              name={name}
-              onChange={this.onChange}
-            />
-          )}
-          <LabeledSelect
-            label="Island"
-            name="island"
-            id="contactInfo"
-            onChange={this.onChange}
-            options={consts.islands}
-            defaultValue="Select an Island"
-          />
+        <DeclareCheckboxSet
+          id="declarePlants"
+          types={consts.plantTypes}
+          onChange={this.onChange}
+          onTextChange={this.onTextChange}
+          removeItem={this.removeItem}
+          handleTouchTap={this.handleTouchTap}
+          formData={formData}
+        />
+        <DeclareCheckboxSet
+          id="declareAnimals"
+          types={consts.animalTypes}
+          onChange={this.onChange}
+          onTextChange={this.onTextChange}
+          removeItem={this.removeItem}
+          handleTouchTap={this.handleTouchTap}
+          formData={formData}
+        />
+        <h4>Contact Information</h4>
+        {form.contactInputs.map(({ name, placeholder }, i) =>
           <LabeledInput
-            placeholder="Phone Number"
-            name="phoneNumber"
+            key={i}
             id="contactInfo"
-            onChange={this.onChange}
-            error={errors[ 'phoneNumber' ]}
+            error={errors[ name ]}
+            placeholder={placeholder}
+            name={name}
+            onChange={this._onInfoUpdate}
           />
-          <LabeledInput
-            placeholder="Email"
-            name="email"
-            id="contactInfo"
-            onChange={this.onChange}
-            error={errors[ 'email' ]}
-          />
-          <LabeledSelect
-            label="Size of Party"
-            name="partySize"
-            id="contactInfo"
-            onChange={this.onChange}
-            options={consts.rangeOption}
-            defaultValue="0"
-          />
-          <LabeledSelect
-            label="Airline"
-            name="airline"
-            id="contactInfo"
-            onChange={this.onChange}
-            options={consts.airlines}
-            defaultValue="Select Airline"
-          />
-          <LabeledInput
-            placeholder="Flight Number"
-            name="flightNumber"
-            id="contactInfo"
-            onChange={this.onChange}
-            error={errors[ 'flightNumber' ]}
-          />
-          <button type="submit">Hello</button>
-        </form>
+        )}
+        <LabeledSelect
+          label="Island"
+          name="island"
+          id="contactInfo"
+          onChange={this._onInfoUpdate}
+          options={consts.islands}
+          defaultValue="Select an Island"
+        />
+        <LabeledInput
+          placeholder="Phone Number"
+          name="phoneNumber"
+          id="contactInfo"
+          onChange={this._onInfoUpdate}
+          error={errors[ 'phoneNumber' ]}
+        />
+        <LabeledInput
+          placeholder="Email"
+          name="email"
+          id="contactInfo"
+          onChange={this._onInfoUpdate}
+          error={errors[ 'email' ]}
+        />
+        <LabeledSelect
+          label="Size of Party"
+          name="partySize"
+          id="contactInfo"
+          onChange={this._onInfoUpdate}
+          options={consts.rangeOption}
+          defaultValue="0"
+        />
+        <LabeledSelect
+          label="Airline"
+          name="airline"
+          id="contactInfo"
+          onChange={this._onInfoUpdate}
+          options={consts.airlines}
+          defaultValue="Select Airline"
+        />
+        <LabeledInput
+          placeholder="Flight Number"
+          name="flightNumber"
+          id="contactInfo"
+          onChange={this._onInfoUpdate}
+          error={errors[ 'flightNumber' ]}
+        />
+        <button onClick={this.handleSubmit} >Hello</button>
       </div>
     );
   }
@@ -198,7 +256,8 @@ FormPage.propTypes = {
     formData: PropTypes.object.isRequired,
     errors: PropTypes.object
   }).isRequired,
-  propUpdated: PropTypes.func.isRequired
+  propUpdated: PropTypes.func.isRequired,
+  reset: PropTypes.func.isRequired
 };
 const stateToProps = (state) => state;
 

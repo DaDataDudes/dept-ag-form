@@ -32,6 +32,7 @@ module.exports = {
     'import/no-unresolved': [ 2, { "ignore": ["ui", "api"] } ],
     'linebreak-style': [ 2, 'unix' ],
     'no-console': [ 0 ],
+    'no-param-reassign': 0,
     'no-underscore-dangle': [ 0 ],
     'no-unneeded-ternary': [ 2 ],
     'no-underscore-dangle': [ 0 ],
